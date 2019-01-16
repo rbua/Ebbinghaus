@@ -1,0 +1,72 @@
+DROP DATABASE dictionary;
+CREATE database dictionary;
+USE dictionary;
+
+CREATE TABLE EN_RU_word_translation(
+translation_ID INTEGER AUTO_INCREMENT,
+word VARCHAR(80) NOT NULL UNIQUE,
+translated VARCHAR(80) NOT NULL,
+CONSTRAINT PK_translation_ID PRIMARY KEY (translation_ID)
+);
+
+CREATE TABLE list_of_word_categories(
+word_category_id SMALLINT AUTO_INCREMENT,
+word_category VARCHAR(80),
+CONSTRAINT PK_word_list_category_id PRIMARY KEY (word_category_id)
+);
+
+CREATE TABLE word_categories_translation(
+categories_ID INTEGER AUTO_INCREMENT,
+word VARCHAR(80) NOT NULL,
+word_category_id SMALLINT,
+translation VARCHAR(80)NOT NULL,
+CONSTRAINT PK_word_word_category PRIMARY KEY (categories_ID),
+CONSTRAINT FK_list_of_word_categories FOREIGN KEY (word_category_id)
+REFERENCES list_of_word_categories(word_category_id)
+);
+
+CREATE TABLE sentences(
+sentences_ID INTEGER AUTO_INCREMENT,
+sentence_EN	VARCHAR(400) NOT NULL,
+sentence_RU VARCHAR(400) NOT NULL,
+CONSTRAINT PK_sentences_ID PRIMARY KEY (sentences_ID),
+CONSTRAINT sentence_EN_RU_UNIQUE UNIQUE(sentence_EN(300),sentence_RU(300))
+);
+
+CREATE TABLE audio_sentences(
+audio_sentences_ID INTEGER AUTO_INCREMENT,
+sentence_EN VARCHAR(600),
+sentence_RU VARCHAR(600),
+URL VARCHAR(200),
+file_name VARCHAR(100),
+CONSTRAINT PK_audio_sentences_ID PRIMARY KEY (audio_sentences_ID)
+);
+
+CREATE TABLE translation_ID_ALL_key(
+ID INTEGER AUTO_INCREMENT,
+translation_ID INTEGER NOT NULL,
+categories_ID INTEGER,
+sentences_ID INTEGER,
+audio_sentences_ID INTEGER,
+CONSTRAINT PK_ID PRIMARY KEY (ID),
+
+CONSTRAINT FK_word_categories_translation FOREIGN KEY (categories_ID)
+REFERENCES word_categories_translation(categories_ID),
+
+CONSTRAINT FK_sentences_ID FOREIGN KEY (sentences_ID) 
+REFERENCES sentences(sentences_ID),
+
+CONSTRAINT FK_EN_RU_word_translation FOREIGN KEY (translation_ID) 
+REFERENCES EN_RU_word_translation(translation_ID),
+
+CONSTRAINT FK_audio_sentences FOREIGN KEY (audio_sentences_ID)
+REFERENCES audio_sentences(audio_sentences_ID)
+);
+
+
+SELECT * FROM EN_RU_word_translation;
+SELECT * FROM word_categories_translation;
+SELECT * FROM sentences;
+SELECT * FROM audio_sentences;
+SELECT * FROM translation_ID_ALL_key;
+SELECT * FROM list_of_word_categories;

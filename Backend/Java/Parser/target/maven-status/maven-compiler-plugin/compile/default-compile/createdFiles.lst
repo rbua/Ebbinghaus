@@ -1,0 +1,6 @@
+ServiceJava\Database\Database.class
+ServiceJava\Parser\Synonyms.class
+ServiceJava\ConnectByHttp.class
+ServiceJava\Parser\Parser.class
+ServiceJava\Parser\FullTranslation.class
+ServiceJava\Main.class

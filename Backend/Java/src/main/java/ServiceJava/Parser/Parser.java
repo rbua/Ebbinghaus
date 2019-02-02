@@ -14,6 +14,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.stream.Stream;
 
 /**
  * This class is used for getting translation from English to Russian

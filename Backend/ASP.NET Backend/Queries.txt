@@ -1,0 +1,80 @@
+{ "get arguments" : {  },"post arguments" : {  }  }
+   ip = ::1     useragent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36
+
+
+
+{ "get arguments" : {  },"post arguments" : {  }  }
+   ip = ::1     useragent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36
+
+
+
+{ "get arguments" : {  },"post arguments" : {  }  }
+   ip = ::1     useragent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko
+
+
+
+{ "get arguments" : {  },"post arguments" : {  }  }
+   ip = ::1     useragent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko
+
+
+
+{ "get arguments" : {  },"post arguments" : {  }  }
+   ip = ::1     useragent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko
+
+
+
+{ "get arguments" : {  },"post arguments" : {  }  }
+   ip = ::1     useragent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36
+
+
+
+{ "get arguments" : {  },"post arguments" : {  }  }
+   ip = ::1     useragent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko
+
+
+
+{ "get arguments" : {  },"post arguments" : {  }  }
+   ip = ::1     useragent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko
+
+
+
+{ "get arguments" : {  },"post arguments" : {  }  }
+   ip = ::1     useragent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko
+
+
+
+{ "get arguments" : {  },"post arguments" : {  }  }
+   ip = ::1     useragent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko
+
+
+
+{ "get arguments" : {  },"post arguments" : {  }  }
+   ip = ::1     useragent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36
+
+
+
+{ "get arguments" : {  },"post arguments" : {  }  }
+   ip = ::1     useragent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36
+
+
+
+{ "get arguments" : {  },"post arguments" : {  }  }
+   ip = ::1     useragent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36
+
+
+
+{ "get arguments" : {  },"post arguments" : {  }  }
+   ip = ::1     useragent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36
+
+
+
+{ "get arguments" : { "a" : "123", "b" : "brp", "c" : "cian"   },"post arguments" : {  }  }
+   ip = ::1     useragent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36
+
+
+
+{ "get arguments" : {  },"post arguments" : {  }  }
+   ip = ::1     useragent: Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko
+
+
+

@@ -225,7 +225,6 @@ public FullTranslation getSimpleWordTranslationById(int IDofWord){
         fullTranslation.setSuccessful(true);
         return fullTranslation;
     }
-
     synchronized public boolean putAllFullTranslation(FullTranslation fullTranslation) {
         if (fullTranslation == null) return false;
         checkDatabaseSize();

@@ -3,6 +3,7 @@ package ServiceJava.Parser;
 public class FullTranslation {
     private String wordToTranslate;
     private String translatedWord;
+    private String wordENAudioURL;
     private Synonyms[] synonyms;
     private String[][] sentencesInEnglishRussian = null;
     private String[] sentencesToVoiceENtext = null;
@@ -20,6 +21,14 @@ public class FullTranslation {
 
     public boolean isFromCache() {
         return isFromCache;
+    }
+
+    public String getWordENAudioURL() {
+        return wordENAudioURL;
+    }
+
+    public void setWordENAudioURL(String wordENAudioURL) {
+        this.wordENAudioURL = wordENAudioURL;
     }
 
     public void setFromCache(boolean fromCache) {

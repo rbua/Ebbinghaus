@@ -23,36 +23,34 @@ import java.util.HashMap;
  */
 
 public class Parser {
-    public FullTranslation getFullTranslation(String totranslate) {
-        String url = "https://www.babla.ru/английский-русский/" + totranslate;
+    public FullTranslation getFullTranslation(String toTranslate) {
+        String url = "https://www.babla.ru/английский-русский/" + toTranslate;
         FullTranslation fullTranslation;
         try {//just selector for parse
             Document document = Jsoup.connect(url).header("Accept-Encoding", "gzip, deflate").userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0").maxBodySize(0).timeout(0).get();
-       //deprecated     fullTranslation = new FullTranslation(totranslate, document.select("ul.sense-group-results li a").first().text());
-            if(!simpleTranslationOfEverything(totranslate).matches(".*\\p{InCyrillic}.*")){
-                fullTranslation=new FullTranslation("","");
+            //deprecated     fullTranslation = new FullTranslation(toTranslate, document.select("ul.sense-group-results li a").first().text());
+            if (!simpleTranslationOfEverything(toTranslate).matches(".*\\p{InCyrillic}.*")) {
+                fullTranslation = new FullTranslation("", "");
                 fullTranslation.setSuccessful(false);
                 return fullTranslation;
             }
-            fullTranslation = new FullTranslation(totranslate, simpleTranslationOfEverything(totranslate));
+            fullTranslation = new FullTranslation(toTranslate, simpleTranslationOfEverything(toTranslate));
             fullTranslation.setSynonyms(getSynonymsFromDiv(document.getAllElements()));
             fullTranslation.setSentencesInEnglishRussian(getSentencesInEnglishRussian(document.getAllElements()));
         } catch (IOException e) {
-            fullTranslation=new FullTranslation("","");
+            fullTranslation = new FullTranslation("", "");
             fullTranslation.setSuccessful(false);
             return fullTranslation;
         } catch (NullPointerException e) {
-            fullTranslation=new FullTranslation("","");
+            fullTranslation = new FullTranslation("", "");
             fullTranslation.setSuccessful(false);
             return fullTranslation;
         }
-        if (fullTranslation.getTranslatedWord() == null || fullTranslation.getTranslatedWord().equals(""))
-        {
-            fullTranslation=new FullTranslation("","");
+        if (fullTranslation.getTranslatedWord() == null || fullTranslation.getTranslatedWord().equals("")) {
+            fullTranslation = new FullTranslation("", "");
             fullTranslation.setSuccessful(false);
             return fullTranslation;
-        }
-        else{
+        } else {
             fullTranslation.setSuccessful(true);
             fullTranslation.setFromCache(false);
             return fullTranslation;
@@ -66,12 +64,14 @@ public class Parser {
         String[][] result = new String[2][ammountOfElements];
         for (int counter = 0; counter < ammountOfElements; counter++) {
             if (localElements.get(counter).select("div.dict-source").first().children().size() > 0)
-                result[0][counter] = localElements.get(counter).select("div.dict-source").first().text().substring(localElements.get(counter).select("div.dict-source>" + localElements.get(counter).select("div.dict-source").first().children().first().tag()).first().text().length()).replaceAll("[\"]","");
-            else result[0][counter] = localElements.get(counter).select("div.dict-source").first().text().replaceAll("[\"]","");
+                result[0][counter] = localElements.get(counter).select("div.dict-source").first().text().substring(localElements.get(counter).select("div.dict-source>" + localElements.get(counter).select("div.dict-source").first().children().first().tag()).first().text().length()).replaceAll("[\"]", "");
+            else
+                result[0][counter] = localElements.get(counter).select("div.dict-source").first().text().replaceAll("[\"]", "");
 
             if (localElements.get(counter).select("div.dict-result").first().children().size() > 0)
-                result[1][counter] = localElements.get(counter).select("div.dict-result").first().text().substring(localElements.get(counter).select("div.dict-result>" + localElements.get(counter).select("div.dict-result").first().children().first().tag()).first().text().length()).replaceAll("[\"]","");
-            else result[1][counter] = localElements.get(counter).select("div.dict-result").first().text().replaceAll("[\"]","");
+                result[1][counter] = localElements.get(counter).select("div.dict-result").first().text().substring(localElements.get(counter).select("div.dict-result>" + localElements.get(counter).select("div.dict-result").first().children().first().tag()).first().text().length()).replaceAll("[\"]", "");
+            else
+                result[1][counter] = localElements.get(counter).select("div.dict-result").first().text().replaceAll("[\"]", "");
         }
 
         return result;
@@ -86,7 +86,7 @@ public class Parser {
         String category;
         for (int outerCounter = 0; outerCounter < ammountOfElements; outerCounter++) {
             wordInEnglish = localElements1.select("div.quick-result-entry > div.quick-result-option > a[href=#translationsdetails" + String.valueOf(outerCounter + 1) + "]").text();
-            category = localElements1.select("div.quick-result-entry > div.quick-result-option > a[href=#translationsdetails" + String.valueOf(outerCounter + 1) + "]~span.suffix").text().replaceAll("[-+.^:,{\"}]","").replaceAll("\\[", "").replaceAll("\\]","");
+            category = localElements1.select("div.quick-result-entry > div.quick-result-option > a[href=#translationsdetails" + String.valueOf(outerCounter + 1) + "]~span.suffix").text().replaceAll("[-+.^:,{\"}]", "").replaceAll("\\[", "").replaceAll("\\]", "");
             if (category.equals("")) {
                 return null;
             }
@@ -100,41 +100,81 @@ public class Parser {
         }
         return synonyms;
     }
-public String simpleTranslationOfEverything(String toTranslate) throws IOException {
-   String url="https://translate.google.sn/translate_a/t?client=dict-chrome-ex&sl=en&tl=ru&q="+toTranslate.replaceAll(" ","%20")+"&tbb=1&ie=UTF-8&oe=UTF-8";
-    URLConnection connection = new URL(url).openConnection();
-    connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
-    connection.connect();
-
-    BufferedReader r  = new BufferedReader(new InputStreamReader(connection.getInputStream(), Charset.forName("UTF-8")));
-
-    StringBuilder sb = new StringBuilder();
-    String line;
-    while ((line = r.readLine()) != null) {
-        sb.append(line);
-    }
-    JSONObject json=new JSONObject(sb.toString());
-    HashMap hashMap= (HashMap) json.getJSONArray("sentences").toList().iterator().next();
-        return (String) hashMap.get("trans");
-    }
-    public boolean isTranslationExists(String totranslate) {
-        String url = "https://www.babla.ru/английский-русский/" + totranslate;
-        String translated = null;
-
-        try {//just selector for parse
-            translated = Jsoup.connect(url).header("Accept-Encoding", "gzip, deflate").userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0").maxBodySize(0).timeout(0).get().select("ul.sense-group-results li a").first().text();
-
-        } catch (IOException e) {
-            return false;
-        } catch (NullPointerException e) {
-            System.out.println("null");
-            return false;
+public String getWordENAudio(String wordInEnglish,boolean US){
+        char firstLetter=wordInEnglish.charAt(0);
+    String url,url2;
+        if(US) {
+            url = "https://myefe.ru/data/sw/cwords/us/" + firstLetter + "/" + wordInEnglish + ".mp3";
+            url2 = "https://myefe.ru/data/sw/words/us/" + firstLetter + "/" + wordInEnglish + "__us_1.mp3";
+        }else {
+            url = "https://myefe.ru/data/sw/cwords/gb/" + firstLetter + "/" + wordInEnglish + ".mp3";
+            url2 = "https://myefe.ru/data/sw/words/gb/" + firstLetter + "/" + wordInEnglish + "__gb_1.mp3";
         }
-        if (translated == null || translated == "")
-            return false;
-        else
-            return true;//translation exists
+    URLConnection connection = null;
+    try {
+        connection = new URL(url).openConnection();
+        connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
+        connection.connect();
+        if(connection.getHeaderField(null).contains("200 OK")) return url;
+        else {
+            connection = new URL(url2).openConnection();
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
+            connection.connect();
+        }
+        if(connection.getHeaderField(null).contains("200 OK")) return url2;
+        return "";
+    } catch (IOException e) {
+        e.printStackTrace();
+        return "";
     }
+}
+public FullTranslation getSimpleTranslationOfWordWithAudio(String toTranslate){
+        FullTranslation fullTranslation=getSimpleTranslationOfEverything(toTranslate);
+        fullTranslation.setWordENAudioURL(getWordENAudio(toTranslate,true));
+        return fullTranslation;
+}
+    public FullTranslation getSimpleTranslationOfEverything(String toTranslate) {
+        FullTranslation fullTranslation;
+        fullTranslation = new FullTranslation(toTranslate, simpleTranslationOfEverything(toTranslate));
+        fullTranslation.setSuccessful(true);
+        fullTranslation.setFromCache(false);
+
+        if (fullTranslation == null || !fullTranslation.getTranslatedWord().matches(".*\\p{InCyrillic}.*")) {
+            fullTranslation = new FullTranslation("", "");
+            fullTranslation.setFromCache(false);
+            fullTranslation.setSuccessful(false);
+        }
+
+        return fullTranslation;
+
+    }
+
+    private String simpleTranslationOfEverything(String toTranslate) {
+        String url = "https://translate.google.sn/translate_a/t?client=dict-chrome-ex&sl=en&tl=ru&q=" + toTranslate.replaceAll(" ", "%20") + "&tbb=1&ie=UTF-8&oe=UTF-8";
+        URLConnection connection = null;
+        try {
+            connection = new URL(url).openConnection();
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
+            connection.connect();
+
+            BufferedReader r = new BufferedReader(new InputStreamReader(connection.getInputStream(), Charset.forName("UTF-8")));
+
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = r.readLine()) != null) {
+                sb.append(line);
+            }
+            JSONObject json = new JSONObject(sb.toString());
+            HashMap hashMap = (HashMap) json.getJSONArray("sentences").toList().iterator().next();
+            return (String) hashMap.get("trans");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
+
+
+    }
+
 
     public String oldgetTranslation(String totranslate) {
         String url = "https://dictionary.cambridge.org/ru/словарь/английский/" + totranslate;
@@ -144,13 +184,13 @@ public String simpleTranslationOfEverything(String toTranslate) throws IOExcepti
             translated = Jsoup.connect(url).header("Accept-Encoding", "gzip, deflate").userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0").maxBodySize(0).timeout(0).get().select("a[title=" + totranslate + ": перевод на русский] p.flush").last().text();
 
         } catch (IOException e) {
-            return "Слово не найдено";
+            return "";
         } catch (NullPointerException e) {
             System.out.println("null");
-            return "Слово не найдено";
+            return "";
         }
         if (translated == null || translated == "")
-            return "Слово не найдено";
+            return "";
         else
             return translated.split(",")[0];//to get back only the first word
     }

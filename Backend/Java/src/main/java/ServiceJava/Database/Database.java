@@ -10,7 +10,7 @@ public class Database {
 
     Connection connectionToDatabase;
     private boolean connected = false;
-
+    private boolean freeSpace=true;
     public boolean isConnected() {
         return connected;
     }
@@ -27,7 +27,29 @@ public class Database {
         }
 
     }
+public FullTranslation getSimpleWordTranslationById(int IDofWord){
+        FullTranslation fullTranslation=null;
+    try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT word,translated FROM EN_RU_word_translation WHERE translation_ID=?;")) {
+        preparedStatementForEN_RU_word_translationSELECT.setInt(1, IDofWord);
+        ResultSet resultSet = preparedStatementForEN_RU_word_translationSELECT.executeQuery();
+        if (resultSet.first()) {
+            fullTranslation=new FullTranslation(resultSet.getString(1),resultSet.getString(2));
+            fullTranslation.setSuccessful(true);
+            fullTranslation.setFromCache(true);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }finally {
+        if (fullTranslation!=null)return fullTranslation;
+        else {
+            fullTranslation=new FullTranslation("","");
+            fullTranslation.setSuccessful(false);
+            fullTranslation.setFromCache(false);
+            return fullTranslation;
+        }
 
+    }
+}
     public FullTranslation getFullTranslationById(int IDofWord) {
         try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT word FROM EN_RU_word_translation WHERE translation_ID=?;")) {
             preparedStatementForEN_RU_word_translationSELECT.setInt(1, IDofWord);
@@ -206,6 +228,8 @@ public class Database {
 
     synchronized public boolean putAllFullTranslation(FullTranslation fullTranslation) {
         if (fullTranslation == null) return false;
+        checkDatabaseSize();
+        if(!freeSpace)return false;
         try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT translation_ID FROM EN_RU_word_translation WHERE word=?;");
              PreparedStatement preparedStatementForWord_categories_translationSELECTForCheck = connectionToDatabase.prepareStatement("SELECT categories_ID FROM word_categories_translation WHERE word=? AND translation=?");
              PreparedStatement preparedStatementForSentencesSELECTForCheck = connectionToDatabase.prepareStatement("SELECT sentences_ID FROM sentences WHERE sentence_EN=? AND sentence_RU=?");
@@ -395,19 +419,27 @@ public class Database {
                 } else preparedStatementForTranslation_ID_ALL_keyINSERT.setNull(4, Types.INTEGER);
                 preparedStatementForTranslation_ID_ALL_keyINSERT.executeUpdate();
             }
-        } catch (DataTruncation e) {
-            connected = false;
-            e.printStackTrace();
         } catch (SQLException e) {
             connected = false;
             e.printStackTrace();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
         }
 
         return true;
     }
+synchronized public void checkDatabaseSize(){
+        try (PreparedStatement preparedStatementForCheck=connectionToDatabase.prepareStatement("SELECT ROUND(SUM(data_length + index_length) / 1024 / 1024, 1) \"Size\" FROM information_schema.tables;")){
+            ResultSet resultSet=preparedStatementForCheck.executeQuery();
+            resultSet.first();
+            if(resultSet.getFloat(1)>95.0){
+            freeSpace=false;
+            }
 
+        }catch (SQLException e){
+            e.printStackTrace();
+            connected=false;
+        }
+
+}
 }

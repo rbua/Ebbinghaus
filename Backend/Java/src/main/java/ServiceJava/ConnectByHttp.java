@@ -56,14 +56,14 @@ public class ConnectByHttp {
             ConnectByHttp.query_pairs = splitQuery(exchange.getRequestURI());
             int secureKey = Integer.parseInt(query_pairs.get("key").iterator().next());
             byte[] bytes = query_pairs.get("word").iterator().next().getBytes("UTF-8");
-            int localcheckKey = 0;
+            int localCheckKey = 0;
             for (int counter = 0; counter < query_pairs.get("word").iterator().next().getBytes("UTF-8").length; counter++) {
-                localcheckKey += VALIDATING_KEY - bytes[counter] ^ VALIDATING_KEY;
+                localCheckKey += VALIDATING_KEY - bytes[counter] ^ VALIDATING_KEY;
             }
-            if (localcheckKey == secureKey) {
+            if (localCheckKey == secureKey && (query_pairs.get("word") != null && query_pairs.get("reqtype") != null)) {
                 System.out.println("KEY SUCCESS");
                 blockingQueueWithQUERY_PAIRS.put(query_pairs);
-                obj = processResponseToJSON(blockingQueueWithRESPONSE_FullTranslation.take());
+                obj = processResponseToJSON(blockingQueueWithRESPONSE_FullTranslation.take(), query_pairs.get("reqtype").iterator().next());
             } else {
                 System.out.println("KEY FAIL");
                 ConnectByHttp.exchange.sendResponseHeaders(403, 0);
@@ -94,6 +94,13 @@ public class ConnectByHttp {
             ConnectByHttp.tempResponseTranslation = null;
             e.printStackTrace();
             return;
+        } catch (NullPointerException e) {
+            ConnectByHttp.exchange.sendResponseHeaders(409, 0);
+            DataOutputStream outputStream = new DataOutputStream(ConnectByHttp.exchange.getResponseBody());
+            outputStream.close();
+            ConnectByHttp.tempResponseTranslation = null;
+            e.printStackTrace();
+            return;
         }
         ConnectByHttp.exchange.sendResponseHeaders(200, obj.toString().getBytes("UTF-16").length);
         DataOutputStream outputStream = new DataOutputStream(ConnectByHttp.exchange.getResponseBody());
@@ -103,19 +110,29 @@ public class ConnectByHttp {
         ConnectByHttp.tempResponseTranslation = null;
     }
 
-    private static JSONObject processResponseToJSON(FullTranslation fullTranslation) {
+    private static JSONObject processResponseToJSON(FullTranslation fullTranslation, String reqtype) {
         JSONObject JSON = new JSONObject();
+        System.out.println("REQTYPE: "+reqtype);
         JSON.put("Successful", fullTranslation.isSuccessful());
         JSON.put("FromCache", fullTranslation.isFromCache());
-        getLightJson(fullTranslation, JSON);
+        switch (reqtype) {
+            case "wordById":
+                getLightJson(fullTranslation, JSON);
+                break;
+            case "simpleTranslation":
+                getLightJson(fullTranslation, JSON);
+                break;
+            default:
+                getLightJson(fullTranslation, JSON);
+        }
+
+
         return JSON;
     }
 
     private static JSONObject getLightJson(FullTranslation fullTranslation, JSONObject JSON) {
-        if (fullTranslation.getTranslatedWord() != null)
-            JSON.put("translation", fullTranslation.getTranslatedWord());
-        else
-            JSON.put("translation", "");
+        JSON.put("translation", fullTranslation.getTranslatedWord());
+        JSON.put("wordToTranslate", fullTranslation.getWordToTranslate());
         System.out.println("From Cache:" + (fullTranslation.isFromCache() ? "YES" : "NO"));
         return JSON;
     }

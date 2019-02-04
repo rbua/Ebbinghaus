@@ -91,11 +91,6 @@
             <artifactId>json</artifactId>
             <version>20160810</version>
         </dependency>
-        <dependency>
-            <groupId>org.junit</groupId>
-            <artifactId>junit-bom</artifactId>
-            <version>5.2.0</version>
-            <scope>test</scope>
-        </dependency>
+
 </dependencies>
 </project>

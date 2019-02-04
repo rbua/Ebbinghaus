@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9e03fed-42ed-4ca9-8f47-28eb88735342" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Parser.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ServiceJava/Database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ServiceJava/Database/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ServiceJava/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ServiceJava/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ServiceJava/Parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ServiceJava/Parser/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Parser-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/Parser-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ServiceJava/ConnectByHttp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ServiceJava/ConnectByHttp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ServiceJava/Database/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ServiceJava/Database/Database.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ServiceJava/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ServiceJava/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ServiceJava/Parser/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ServiceJava/Parser/Parser.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,17 +24,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Database/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-520">
-              <caret line="209" column="18" selection-start-line="209" selection-start-column="18" selection-end-line="209" selection-end-column="18" />
+            <state relative-caret-position="-388">
+              <caret line="95" column="27" selection-start-line="95" selection-start-column="27" selection-end-line="95" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+        <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/String.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="467">
-              <caret line="83" column="40" selection-start-line="83" selection-start-column="40" selection-end-line="83" selection-end-column="40" />
+            <state relative-caret-position="179">
+              <caret line="122" column="19" selection-start-line="122" selection-start-column="19" selection-end-line="122" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -42,7 +46,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Parser/Synonyms.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="84">
-              <caret line="4" column="33" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="33" />
+              <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -50,12 +54,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Parser/FullTranslation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-420">
-              <caret line="25" column="39" selection-start-line="25" selection-start-column="39" selection-end-line="25" selection-end-column="39" />
+            <state relative-caret-position="168">
+              <caret line="8" column="41" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
               <folding>
-                <element signature="e#789#790#0" expanded="true" />
-                <element signature="e#849#850#0" expanded="true" />
-                <element signature="e#901#902#0" expanded="true" />
+                <element signature="e#285#286#0" expanded="true" />
+                <element signature="e#349#350#0" expanded="true" />
+                <element signature="e#405#406#0" expanded="true" />
+                <element signature="e#448#449#0" expanded="true" />
+                <element signature="e#487#488#0" expanded="true" />
+                <element signature="e#551#552#0" expanded="true" />
+                <element signature="e#607#608#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -64,8 +72,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Parser/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="112" column="9" selection-start-line="112" selection-start-column="9" selection-end-line="112" selection-end-column="9" />
+            <state relative-caret-position="1271">
+              <caret line="248" selection-start-line="248" selection-end-line="248" />
               <folding>
                 <element signature="method#oldgetTranslation#0;class#Parser#0" />
                 <element signature="method#getAllSynonymsInRussian#0;class#Parser#0" />
@@ -75,22 +83,23 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1092">
-              <caret line="62" column="30" selection-start-line="62" selection-start-column="30" selection-end-line="62" selection-end-column="30" />
-              <folding>
-                <element signature="method#splitQuery#0;class#ConnectByHttp#0" />
-              </folding>
+            <state relative-caret-position="131">
+              <caret line="18" selection-start-line="18" selection-end-line="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Main.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="13" column="99" selection-start-line="13" selection-start-column="99" selection-end-line="13" selection-end-column="99" />
+            <state relative-caret-position="168">
+              <caret line="131" column="113" lean-forward="true" selection-start-line="131" selection-start-column="113" selection-end-line="131" selection-end-column="113" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#splitQuery#0;class#ConnectByHttp#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -103,6 +112,7 @@
       <find>replaceA</find>
       <find>paral</find>
       <find>Exec</find>
+      <find>copy</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -112,12 +122,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/ServiceJava/Parser/Synonyms.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/ServiceJava/Parser/FullTranslation.java" />
         <option value="$PROJECT_DIR$/src/main/java/ServiceJava/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java" />
         <option value="$PROJECT_DIR$/src/main/java/ServiceJava/Parser/Parser.java" />
         <option value="$PROJECT_DIR$/src/main/java/ServiceJava/Database/Database.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -128,13 +138,22 @@
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
           <item name="Parser" type="9519ce18:MavenProjectsStructure$ProjectNode" />
         </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="Parser" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="Parser" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
+        </path>
       </expand>
       <select />
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="639" />
-    <option name="y" value="-9" />
+    <option name="x" value="960" />
     <option name="width" value="960" />
     <option name="height" value="1032" />
   </component>
@@ -144,6 +163,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -151,22 +171,31 @@
               <item name="Parser" type="b2602c69:ProjectViewProjectNode" />
               <item name="Java" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Parser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549139578117" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549661985281" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Java-Dictionary" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.general" />
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);  Runnable task = () -&gt; System.out.println(&quot;Scheduling: &quot; + System.nanoTime());  int initialDelay = 0; int period = 1; executor.scheduleAtFixedRate(task, initialDelay, period, TimeUnit.SECONDS);" />
+    </option>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -180,7 +209,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ServiceJava.Main" />
       <module name="Parser" />
@@ -194,9 +223,35 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Parser [install]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="install" />
+              </list>
+            </option>
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Maven.Parser [install]" />
       </list>
     </recent_temporary>
   </component>
@@ -215,9 +270,37 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.06283566" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.082706764" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="JProfiler" weight="0.32316384" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.33679354" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.27344632" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.45762712" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3299435" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.31638417" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.24973147" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Maven" order="6" weight="0.32867885" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.14017186" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -226,8 +309,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.3299435" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2756632" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.5322034" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.280226" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.53333336" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -236,40 +319,12 @@
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32316384" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.24973147" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Maven" order="6" weight="0.32918552" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-    </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25725028" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3299435" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Maven" order="6" />
+      <window_info anchor="right" id="Maven" order="6" weight="0.32867885" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout-to-restore>
   </component>
@@ -278,76 +333,101 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/ServiceJava/Parser/Parser.java</url>
-          <line>179</line>
+          <line>256</line>
           <properties class="ServiceJava.Parser.Parser" method="oldgetTranslation">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java</url>
+          <line>70</line>
+          <properties />
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java</url>
+          <line>83</line>
+          <properties />
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ServiceJava/Database/Database.java</url>
+          <line>105</line>
+          <properties />
+          <option name="timeStamp" value="63" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java</url>
+          <line>131</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java</url>
+          <line>130</line>
+          <properties />
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java</url>
+          <line>129</line>
+          <properties />
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
       <expression>
-        <expression-string>connection = new URL(url3).openConnection();
-        connection.setRequestProperty(&quot;User-Agent&quot;, &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11&quot;);
-        connection.connect();
-        connection.getHeaderField(0).contains(&quot;200 OK&quot;);</expression-string>
+        <expression-string>System.gc();</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>connection = new URL(url2).openConnection();
-        connection.setRequestProperty(&quot;User-Agent&quot;, &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11&quot;);
-        connection.connect();
-        connection.getHeaderField(0).contains(&quot;200 OK&quot;);</expression-string>
+        <expression-string>executorService.submit(() -&gt; Database.getInstance().getParametrizedTranslation(toTranslate, isSynonyms, isSentencesENRU, isincludeWordAudio, whichwordAudio, requestBy)).get(100000,TimeUnit.MILLISECONDS)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>connection = new URL(url).openConnection();
-        connection.setRequestProperty(&quot;User-Agent&quot;, &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11&quot;);
-        connection.connect();
-        connection.getHeaderField(0).contains(&quot;200 OK&quot;);</expression-string>
+        <expression-string>executorService.submit(() -&gt; Database.getInstance().getParametrizedTranslation(toTranslate, isSynonyms, isSentencesENRU, isincludeWordAudio, whichwordAudio, requestBy)).get(1,TimeUnit.MILLISECONDS)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>connection = new URL(url).openConnection();
-        connection.setRequestProperty(&quot;User-Agent&quot;, &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11&quot;);
-        connection.connect();
-        connection.getHeaderFields()</expression-string>
+        <expression-string>executorService.submit(() -&gt; Database.getInstance().getParametrizedTranslation(toTranslate, isSynonyms, isSentencesENRU, isincludeWordAudio, whichwordAudio, requestBy));</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>connection = new URL(url).openConnection();
-        connection.setRequestProperty(&quot;User-Agent&quot;, &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11&quot;);
-        connection.connect();
-        connection.getHeaderField(null).contains(&quot;200 OK&quot;);</expression-string>
+        <expression-string>JSON.put(&quot;sentencesENRU&quot;,fullTranslation.getSentencesInEnglishRussian());</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>connection = new URL(url).openConnection();
-        connection.setRequestProperty(&quot;User-Agent&quot;, &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11&quot;);
-        connection.connect();</expression-string>
+        <expression-string>JSON.opt(&quot;&quot;)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>connection.getHeaderField(null).contains(&quot;200 OK&quot;)</expression-string>
+        <expression-string>JSON.opt(&quot;a&quot;)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>connection.getHeaderField(null)</expression-string>
+        <expression-string>JSON.toString().length()</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>connection.getHeaderFields()</expression-string>
+        <expression-string>JSON.getString().length();</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
@@ -358,24 +438,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
           <caret line="288" column="12" selection-start-line="288" selection-start-column="12" selection-end-line="288" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/List.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="610" column="9" selection-start-line="610" selection-start-column="9" selection-end-line="610" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="460" column="44" selection-start-line="460" selection-start-column="41" selection-end-line="460" selection-end-column="44" />
-          <folding>
-            <element signature="e#6326#6327#0" expanded="true" />
-            <element signature="e#6394#6395#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -396,13 +458,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16527">
-          <caret line="843" selection-start-line="843" selection-end-line="843" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/stream/AbstractPipeline.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
@@ -417,27 +472,211 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/Collections.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="140" column="15" selection-start-line="140" selection-start-column="15" selection-end-line="140" selection-end-column="15" />
+          <folding>
+            <element signature="e#5647#5648#0" expanded="true" />
+            <element signature="e#5678#5679#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="503" column="17" selection-start-line="503" selection-start-column="17" selection-end-line="503" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/concurrent/ExecutorService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="236" column="18" selection-start-line="236" selection-start-column="18" selection-end-line="236" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/io/FilterOutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="63" column="34" lean-forward="true" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/io/OutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="141" column="66" lean-forward="true" selection-start-line="141" selection-start-column="66" selection-end-line="141" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/concurrent/FutureTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3973">
+          <caret line="263" selection-start-line="263" selection-end-line="263" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.13/mysql-connector-java-8.0.13.jar!/com/mysql/cj/jdbc/ConnectionImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="1257" selection-start-line="1257" selection-end-line="1257" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/Arrays.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="3719" column="21" selection-start-line="3719" selection-start-column="21" selection-end-line="3719" selection-end-column="21" />
+          <folding>
+            <element signature="e#170105#170135#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="135" column="13" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="13" />
+          <folding>
+            <element signature="e#6326#6327#0" expanded="true" />
+            <element signature="e#6394#6395#0" expanded="true" />
+            <element signature="e#15688#15689#0" expanded="true" />
+            <element signature="e#15733#15734#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/json/json/20160810/json-20160810.jar!/org/json/JSONArray.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4305">
+          <caret line="226" column="71" lean-forward="true" selection-start-line="226" selection-start-column="71" selection-end-line="226" selection-end-column="71" />
+          <folding>
+            <element signature="e#7012#7013#0" expanded="true" />
+            <element signature="e#7107#7108#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/Iterable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/json/json/20160810/json-20160810-sources.jar!/org/json/JSONArray.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="82" column="39" selection-start-line="82" selection-start-column="39" selection-end-line="82" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="92" column="21" selection-start-line="92" selection-start-column="21" selection-end-line="92" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/concurrent/Future.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="142" column="6" selection-start-line="142" selection-start-column="6" selection-end-line="142" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Parser/FullTranslation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="41" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
+          <folding>
+            <element signature="e#285#286#0" expanded="true" />
+            <element signature="e#349#350#0" expanded="true" />
+            <element signature="e#405#406#0" expanded="true" />
+            <element signature="e#448#449#0" expanded="true" />
+            <element signature="e#487#488#0" expanded="true" />
+            <element signature="e#551#552#0" expanded="true" />
+            <element signature="e#607#608#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/concurrent/Callable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="64" column="6" selection-start-line="64" selection-start-column="6" selection-end-line="64" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="140" column="6" selection-start-line="140" selection-start-column="6" selection-end-line="140" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Parser/Synonyms.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
-          <caret line="4" column="33" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="33" />
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/AutoCloseable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="96" column="9" selection-start-line="96" selection-start-column="9" selection-end-line="96" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.sql/java/sql/ResultSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="206" column="9" selection-start-line="206" selection-start-column="9" selection-end-line="206" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.13/mysql-connector-java-8.0.13.jar!/com/mysql/cj/jdbc/result/ResultSetImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="402" column="16" selection-start-line="402" selection-start-column="16" selection-end-line="402" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1092">
-          <caret line="62" column="30" selection-start-line="62" selection-start-column="30" selection-end-line="62" selection-end-column="30" />
+        <state relative-caret-position="168">
+          <caret line="131" column="113" lean-forward="true" selection-start-line="131" selection-start-column="113" selection-end-line="131" selection-end-column="113" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="method#splitQuery#0;class#ConnectByHttp#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Database/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-388">
+          <caret line="95" column="27" selection-start-line="95" selection-start-column="27" selection-end-line="95" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Parser/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="112" column="9" selection-start-line="112" selection-start-column="9" selection-end-line="112" selection-end-column="9" />
+        <state relative-caret-position="1271">
+          <caret line="248" selection-start-line="248" selection-end-line="248" />
           <folding>
             <element signature="method#oldgetTranslation#0;class#Parser#0" />
             <element signature="method#getAllSynonymsInRussian#0;class#Parser#0" />
@@ -445,36 +684,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Main.java">
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/String.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="13" column="99" selection-start-line="13" selection-start-column="99" selection-end-line="13" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Parser/FullTranslation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-420">
-          <caret line="25" column="39" selection-start-line="25" selection-start-column="39" selection-end-line="25" selection-end-column="39" />
-          <folding>
-            <element signature="e#789#790#0" expanded="true" />
-            <element signature="e#849#850#0" expanded="true" />
-            <element signature="e#901#902#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Database/Database.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-520">
-          <caret line="209" column="18" selection-start-line="209" selection-start-column="18" selection-end-line="209" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="83" column="40" selection-start-line="83" selection-start-column="40" selection-end-line="83" selection-end-column="40" />
+        <state relative-caret-position="179">
+          <caret line="122" column="19" selection-start-line="122" selection-start-column="19" selection-end-line="122" selection-end-column="19" />
         </state>
       </provider>
     </entry>

@@ -1,25 +1,25 @@
 package ServiceJava;
 
+import ServiceJava.Database.Database;
 import ServiceJava.Parser.FullTranslation;
+import ServiceJava.Parser.Parser;
+import ServiceJava.Parser.Synonyms;
 import com.sun.net.httpserver.*;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.*;
 import java.net.*;
 import java.util.*;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 import java.util.concurrent.locks.Lock;
 
 
 public class ConnectByHttp {
-    static private HttpExchange exchange = null;
     static private HttpServer server = null;
-    static private volatile Map<String, List<String>> query_pairs = null;
-    static private volatile String tempResponseTranslation = null;
-    static private BlockingQueue<Map<String, List<String>>> blockingQueueWithQUERY_PAIRS = new ArrayBlockingQueue(1);
-    static private BlockingQueue<FullTranslation> blockingQueueWithRESPONSE_FullTranslation = new ArrayBlockingQueue(1);
+
+    static private BlockingQueue<Map<String, List<String>>> blockingQueueWithQUERY_PAIRS = new ArrayBlockingQueue(10);
+    static private BlockingQueue<FullTranslation> blockingQueueWithRESPONSE_FullTranslation = new ArrayBlockingQueue(10);
     static private final int VALIDATING_KEY = 348485251;
 
     public static BlockingQueue<Map<String, List<String>>> getBlockingQueueWithQueryPairs() {
@@ -36,10 +36,11 @@ public class ConnectByHttp {
 
     public static void start(int port) {
         try {
-            server = HttpServer.create(new InetSocketAddress(Integer.parseInt(System.getenv("PORT"))), 1);
+            server = HttpServer.create(new InetSocketAddress(port), 1);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        server.setExecutor(Executors.newFixedThreadPool(5));
         HttpContext context = server.createContext("/dictionary");
         context.setHandler(ConnectByHttp::handleRequest);
         server.start();
@@ -49,70 +50,115 @@ public class ConnectByHttp {
     private static void handleRequest(HttpExchange exchange) throws IOException {
         JSONObject obj = null;
         System.out.println("\nURL " + exchange.getRequestURI());
-        ConnectByHttp.exchange = exchange;
-
-        URI requestURI = ConnectByHttp.exchange.getRequestURI();
+        Map<String, List<String>> query_pairs = null;
+        URI requestURI = exchange.getRequestURI();
         try {
-            ConnectByHttp.query_pairs = splitQuery(exchange.getRequestURI());
+            query_pairs = splitQuery(exchange.getRequestURI());
             int secureKey = Integer.parseInt(query_pairs.get("key").iterator().next());
             byte[] bytes = query_pairs.get("word").iterator().next().getBytes("UTF-8");
             int localCheckKey = 0;
             for (int counter = 0; counter < query_pairs.get("word").iterator().next().getBytes("UTF-8").length; counter++) {
                 localCheckKey += VALIDATING_KEY - bytes[counter] ^ VALIDATING_KEY;
             }
-            if (localCheckKey == secureKey && (query_pairs.get("word") != null && query_pairs.get("reqtype") != null)) {
+            if (localCheckKey != secureKey && (query_pairs.get("word") != null && query_pairs.get("reqtype") != null)) {
                 System.out.println("KEY SUCCESS");
-                blockingQueueWithQUERY_PAIRS.put(query_pairs);
-                obj = processResponseToJSON(blockingQueueWithRESPONSE_FullTranslation.take(), query_pairs.get("reqtype").iterator().next());
+
+                obj = processResponseToJSON(getFullTranslationForResponse(query_pairs), query_pairs.get("reqtype").iterator().next());
             } else {
                 System.out.println("KEY FAIL");
-                ConnectByHttp.exchange.sendResponseHeaders(403, 0);
-                DataOutputStream outputStream = new DataOutputStream(ConnectByHttp.exchange.getResponseBody());
+                exchange.sendResponseHeaders(403, 0);
+                DataOutputStream outputStream = new DataOutputStream(exchange.getResponseBody());
                 outputStream.close();
-                ConnectByHttp.tempResponseTranslation = null;
                 return;
             }
 
-        } catch (UnsupportedEncodingException e) {
-            ConnectByHttp.exchange.sendResponseHeaders(409, 0);
-            DataOutputStream outputStream = new DataOutputStream(ConnectByHttp.exchange.getResponseBody());
+        } catch (UnsupportedEncodingException | NumberFormatException | NullPointerException e) {
+            exchange.sendResponseHeaders(409, 0);
+            DataOutputStream outputStream = new DataOutputStream(exchange.getResponseBody());
             outputStream.close();
-            ConnectByHttp.tempResponseTranslation = null;
             e.printStackTrace();
-            return;
-        } catch (InterruptedException e) {
-            ConnectByHttp.exchange.sendResponseHeaders(409, 0);
-            DataOutputStream outputStream = new DataOutputStream(ConnectByHttp.exchange.getResponseBody());
-            outputStream.close();
-            ConnectByHttp.tempResponseTranslation = null;
-            e.printStackTrace();
-            return;
-        } catch (NumberFormatException e) {
-            ConnectByHttp.exchange.sendResponseHeaders(409, 0);
-            DataOutputStream outputStream = new DataOutputStream(ConnectByHttp.exchange.getResponseBody());
-            outputStream.close();
-            ConnectByHttp.tempResponseTranslation = null;
-            e.printStackTrace();
-            return;
-        } catch (NullPointerException e) {
-            ConnectByHttp.exchange.sendResponseHeaders(409, 0);
-            DataOutputStream outputStream = new DataOutputStream(ConnectByHttp.exchange.getResponseBody());
-            outputStream.close();
-            ConnectByHttp.tempResponseTranslation = null;
-            e.printStackTrace();
-            return;
         }
-        ConnectByHttp.exchange.sendResponseHeaders(200, obj.toString().getBytes("UTF-16").length);
-        DataOutputStream outputStream = new DataOutputStream(ConnectByHttp.exchange.getResponseBody());
+        exchange.sendResponseHeaders(200, obj.toString().getBytes("UTF-16").length);
+        DataOutputStream outputStream = new DataOutputStream(exchange.getResponseBody());
         outputStream.write(obj.toString().getBytes("UTF-16"));
         outputStream.close();
         System.out.println(obj.toString());
-        ConnectByHttp.tempResponseTranslation = null;
     }
+
+    private static FullTranslation getFullTranslationForResponse(Map<String, List<String>> query_pairs) {
+        Parser parser = Parser.getInstance();
+        Database database = Database.getInstance();
+        String toTranslate = query_pairs.get("word").get(0);
+        String type = query_pairs.get("reqtype").get(0);
+        System.out.println(toTranslate + "  request№  " + Thread.currentThread().getName());
+        FullTranslation fullTranslation = null;
+        try {
+            switch (type) {
+                case "getFullTranslation":
+                    if (database.isConnected())
+                        fullTranslation = database.getFullTranslation(toTranslate);
+                    if (fullTranslation == null) {
+                        fullTranslation = parser.getFullTranslation(toTranslate);
+                        if (fullTranslation.isSuccessful() && database.isConnected() && !fullTranslation.getWordToTranslate().matches(".* .*"))
+                            database.putAllFullTranslation(fullTranslation);
+                    }
+                    break;
+                case "wordById":
+                    if (database.isConnected())
+                        try {
+                            fullTranslation = database.getSimpleWordTranslationById(Integer.parseInt(toTranslate));
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                            fullTranslation = new FullTranslation("", "");
+                            fullTranslation.setSuccessful(false);
+                            fullTranslation.setFromCache(false);
+                            return fullTranslation;
+
+                        }
+                    else fullTranslation = new FullTranslation("", "");
+                    break;
+                case "simpleTranslation":
+                    fullTranslation = parser.getSimpleTranslationOfEverything(toTranslate);
+                    break;
+                case "parametrizedWordTranslation":
+                    if (query_pairs.get("synonyms") != null && query_pairs.get("sentencesENRU") != null && query_pairs.get("wordAudio") != null && query_pairs.get("requestBy") != null && query_pairs.get("includeWordAudio") != null && toTranslate != null) {
+                        if (toTranslate.matches(".* .*")) break;
+                        boolean isSynonyms = Boolean.parseBoolean(query_pairs.get("synonyms").iterator().next());
+                        boolean isSentencesENRU = Boolean.parseBoolean(query_pairs.get("sentencesENRU").iterator().next());
+                        boolean isincludeWordAudio = Boolean.parseBoolean(query_pairs.get("includeWordAudio").iterator().next());
+                        String whichwordAudio = query_pairs.get("wordAudio").iterator().next();
+                        String requestBy = query_pairs.get("requestBy").iterator().next();
+                        ExecutorService executorService = Executors.newFixedThreadPool(2);
+                        Future futureDatabase = executorService.submit(() -> Database.getInstance().getParametrizedTranslation(toTranslate, isSynonyms, isSentencesENRU, isincludeWordAudio, whichwordAudio, requestBy));
+                        Future futureParser = executorService.submit(() -> Parser.getInstance().getParametrizedTranslation(toTranslate, isSynonyms, isSentencesENRU, isincludeWordAudio, whichwordAudio));
+                        fullTranslation = (FullTranslation) futureDatabase.get(5000, TimeUnit.MILLISECONDS);
+                        if (fullTranslation == null) {
+                           fullTranslation = (FullTranslation) futureParser.get(5000, TimeUnit.MILLISECONDS);
+                        }
+                        executorService.shutdown();
+                    }
+                    break;
+                default:
+                    fullTranslation = new FullTranslation("", "");
+                    fullTranslation.setSuccessful(false);
+                    fullTranslation.setFromCache(false);
+            }
+        } catch (InterruptedException | ExecutionException | ClassCastException | TimeoutException e) {
+            e.printStackTrace();
+        } finally {
+            if (fullTranslation == null) {
+                fullTranslation = new FullTranslation("", "");
+                fullTranslation.setSuccessful(false);
+                fullTranslation.setFromCache(false);
+            }
+            return fullTranslation;
+        }
+    }
+
 
     private static JSONObject processResponseToJSON(FullTranslation fullTranslation, String reqtype) {
         JSONObject JSON = new JSONObject();
-        System.out.println("REQTYPE: "+reqtype);
+        System.out.println("REQTYPE: " + reqtype);
         JSON.put("Successful", fullTranslation.isSuccessful());
         JSON.put("FromCache", fullTranslation.isFromCache());
         switch (reqtype) {
@@ -122,12 +168,32 @@ public class ConnectByHttp {
             case "simpleTranslation":
                 getLightJson(fullTranslation, JSON);
                 break;
+            case "parametrizedWordTranslation":
+                getparametrizedJson(fullTranslation, JSON);
             default:
                 getLightJson(fullTranslation, JSON);
         }
 
 
         return JSON;
+    }
+
+    private static JSONObject getparametrizedJson(FullTranslation fullTranslation, JSONObject JSON) {
+        if (fullTranslation.getWordENAudioURLGB() != null)
+            JSON.put("wordAudio", fullTranslation.getWordENAudioURLGB());
+        if (fullTranslation.getWordENAudioURLUS() != null)
+            JSON.put("wordAudio", fullTranslation.getWordENAudioURLUS());
+        if (fullTranslation.getSynonyms() != null) {
+            JSONObject arrayOfWordsCategories = new JSONObject();
+            for (Synonyms synonyms : fullTranslation.getSynonyms()) {
+                arrayOfWordsCategories.put(synonyms.getWordInEnglish() + " " + synonyms.getWordCategory(), synonyms.getTranslations());
+            }
+            JSON.put("synonyms", arrayOfWordsCategories);
+        }
+        if (fullTranslation.getSentencesInEnglishRussian() != null)
+            JSON.put("sentencesENRU", fullTranslation.getSentencesInEnglishRussian());
+        return JSON;
+
     }
 
     private static JSONObject getLightJson(FullTranslation fullTranslation, JSONObject JSON) {

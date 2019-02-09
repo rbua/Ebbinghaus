@@ -5,6 +5,15 @@ public class FullTranslation {
     private String translatedWord;
     private String wordENAudioURLUS;
     private String wordENAudioURLGB;
+private int wordID;
+
+    public int getWordID() {
+        return wordID;
+    }
+
+    public void setWordID(int wordID) {
+        this.wordID = wordID;
+    }
 
     public String getWordENAudioURLUS() {
         return wordENAudioURLUS;

@@ -5,14 +5,12 @@ import ServiceJava.Parser.FullTranslation;
 import ServiceJava.Parser.Parser;
 import ServiceJava.Parser.Synonyms;
 import com.sun.net.httpserver.*;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.*;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.*;
-import java.util.concurrent.locks.Lock;
 
 
 public class ConnectByHttp {
@@ -162,6 +160,18 @@ public class ConnectByHttp {
                         fullTranslation.setFromCache(false);
                     }
                     break;
+                case"getID":
+                    if(toTranslate==null||toTranslate.matches(".*\\p{InCyrillic}.*")||toTranslate.matches(".* .*")||toTranslate.equals("")) break;
+                    fullTranslation=new FullTranslation(toTranslate,"");
+                    fullTranslation.setWordID(Database.getInstance().getWordId(toTranslate));
+                    if(fullTranslation.getWordID()!=0){
+                        fullTranslation.setSuccessful(true);
+                        fullTranslation.setFromCache(true);
+                    }else {
+                        fullTranslation.setSuccessful(false);
+                        fullTranslation.setFromCache(false);
+                    }
+                    break;
                 default:
                     fullTranslation = new FullTranslation("", "");
                     fullTranslation.setSuccessful(false);
@@ -193,8 +203,12 @@ public class ConnectByHttp {
                 getLightJson(fullTranslation, JSON);
                 break;
             case "parametrizedWordTranslation":
+                getparametrizedJson(fullTranslation,JSON);
                 break;
             case "putToCache":
+                break;
+            case "getID":
+                JSON.put("wordID",fullTranslation.getWordID());
                 break;
             default:
                 getLightJson(fullTranslation, JSON);
@@ -205,6 +219,7 @@ public class ConnectByHttp {
     }
 
     private static JSONObject getparametrizedJson(FullTranslation fullTranslation, JSONObject JSON) {
+        getLightJson(fullTranslation,JSON);
         if (fullTranslation.getWordENAudioURLGB() != null)
             JSON.put("wordAudioGB", fullTranslation.getWordENAudioURLGB());
         if (fullTranslation.getWordENAudioURLUS() != null)
@@ -225,7 +240,6 @@ public class ConnectByHttp {
     private static JSONObject getLightJson(FullTranslation fullTranslation, JSONObject JSON) {
         JSON.put("translation", fullTranslation.getTranslatedWord());
         JSON.put("wordToTranslate", fullTranslation.getWordToTranslate());
-        System.out.println("From Cache:" + (fullTranslation.isFromCache() ? "YES" : "NO"));
         return JSON;
     }
 

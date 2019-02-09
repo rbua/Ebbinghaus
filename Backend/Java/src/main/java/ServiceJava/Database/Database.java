@@ -146,6 +146,18 @@ public class Database {
         }
     }
 
+    public int getWordId(String toFind){
+        int result=0;
+        try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT translation_ID FROM EN_RU_word_translation WHERE word=?;")){
+        preparedStatementForEN_RU_word_translationSELECT.setString(1,toFind);
+        ResultSet resultSet=preparedStatementForEN_RU_word_translationSELECT.executeQuery();
+        if(resultSet.first())result= resultSet.getInt(1);
+        resultSet.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return result;
+    };
     private String getWordAudio(String toTranslate, boolean US) {
         if (!connected) {
             return null;

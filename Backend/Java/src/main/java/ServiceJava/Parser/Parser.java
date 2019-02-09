@@ -132,14 +132,14 @@ public class Parser {
     }
 
     public String getWordENAudio(String wordInEnglish, boolean US) {
-        char firstLetter = wordInEnglish.charAt(0);
+        char firstLetter = wordInEnglish.toLowerCase().charAt(0);
         String url, url2;
         if (US) {
-            url = "https://myefe.ru/data/sw/cwords/us/" + firstLetter + "/" + wordInEnglish + ".mp3";
-            url2 = "https://myefe.ru/data/sw/words/us/" + firstLetter + "/" + wordInEnglish + "__us_1.mp3";
+            url = "https://myefe.ru/data/sw/cwords/us/" + firstLetter + "/" + wordInEnglish.toLowerCase() + ".mp3";
+            url2 = "https://myefe.ru/data/sw/words/us/" + firstLetter + "/" + wordInEnglish.toLowerCase() + "__us_1.mp3";
         } else {
-            url = "https://myefe.ru/data/sw/cwords/gb/" + firstLetter + "/" + wordInEnglish + ".mp3";
-            url2 = "https://myefe.ru/data/sw/words/gb/" + firstLetter + "/" + wordInEnglish + "__gb_1.mp3";
+            url = "https://myefe.ru/data/sw/cwords/gb/" + firstLetter + "/" + wordInEnglish.toLowerCase() + ".mp3";
+            url2 = "https://myefe.ru/data/sw/words/gb/" + firstLetter + "/" + wordInEnglish.toLowerCase() + "__gb_1.mp3";
         }
         URLConnection connection = null;
         try {

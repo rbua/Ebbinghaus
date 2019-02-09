@@ -4,12 +4,11 @@
     <list default="true" id="d9e03fed-42ed-4ca9-8f47-28eb88735342" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ServiceJava/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ServiceJava/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ServiceJava/Database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ServiceJava/Database/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ServiceJava/Parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ServiceJava/Parser/Parser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Parser-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/Parser-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ServiceJava/ConnectByHttp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ServiceJava/ConnectByHttp.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ServiceJava/Database/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ServiceJava/Database/Database.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ServiceJava/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ServiceJava/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ServiceJava/Parser/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ServiceJava/Parser/Parser.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -24,20 +23,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Database/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-388">
-              <caret line="95" column="27" selection-start-line="95" selection-start-column="27" selection-end-line="95" selection-end-column="27" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/String.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="122" column="19" selection-start-line="122" selection-start-column="19" selection-end-line="122" selection-end-column="19" />
+            <state relative-caret-position="145">
+              <caret line="34" column="13" lean-forward="true" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -54,17 +41,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Parser/FullTranslation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="8" column="41" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
-              <folding>
-                <element signature="e#285#286#0" expanded="true" />
-                <element signature="e#349#350#0" expanded="true" />
-                <element signature="e#405#406#0" expanded="true" />
-                <element signature="e#448#449#0" expanded="true" />
-                <element signature="e#487#488#0" expanded="true" />
-                <element signature="e#551#552#0" expanded="true" />
-                <element signature="e#607#608#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="378">
+              <caret line="26" column="41" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -72,8 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Parser/Parser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1271">
-              <caret line="248" selection-start-line="248" selection-end-line="248" />
+            <state relative-caret-position="596">
+              <caret line="237" lean-forward="true" selection-start-line="237" selection-end-line="237" />
               <folding>
                 <element signature="method#oldgetTranslation#0;class#Parser#0" />
                 <element signature="method#getAllSynonymsInRussian#0;class#Parser#0" />
@@ -85,21 +63,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="379">
+              <caret line="38" column="30" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1025">
+              <caret line="50" column="30" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
+              <folding>
+                <element signature="method#splitQuery#0;class#ConnectByHttp#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="131" column="113" lean-forward="true" selection-start-line="131" selection-start-column="113" selection-end-line="131" selection-end-column="113" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#splitQuery#0;class#ConnectByHttp#0" />
-              </folding>
+            <state relative-caret-position="336">
+              <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -116,7 +102,7 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -125,9 +111,9 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/ServiceJava/Parser/FullTranslation.java" />
         <option value="$PROJECT_DIR$/src/main/java/ServiceJava/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java" />
         <option value="$PROJECT_DIR$/src/main/java/ServiceJava/Parser/Parser.java" />
         <option value="$PROJECT_DIR$/src/main/java/ServiceJava/Database/Database.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java" />
       </list>
     </option>
   </component>
@@ -152,8 +138,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="960" />
+  <component name="ProjectFrameBounds">
     <option name="width" value="960" />
     <option name="height" value="1032" />
   </component>
@@ -163,29 +148,50 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="Parser" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="Java-Dictionary" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Parser" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Java" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="Java-Dictionary" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Parser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java-Dictionary" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Parser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java-Dictionary" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Parser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java-Dictionary" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ServiceJava" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549661985281" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Java-Dictionary" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549667324963" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -209,7 +215,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Maven.Parser [install]">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ServiceJava.Main" />
       <module name="Parser" />
@@ -250,8 +256,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="Maven.Parser [install]" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -269,20 +275,20 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
+    <frame x="0" y="0" width="960" height="1032" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.082706764" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3020362" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="JProfiler" weight="0.32316384" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.33679354" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.27344632" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.45762712" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2733564" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.45536724" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -290,13 +296,14 @@
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.31638417" />
+      <window_info anchor="bottom" id="JProfiler" order="11" weight="0.5502825" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.24973147" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Maven" order="6" weight="0.32867885" />
+      <window_info anchor="right" id="Maven" order="6" weight="0.67508054" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
     <layout-to-restore>
@@ -331,51 +338,17 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/ServiceJava/Parser/Parser.java</url>
-          <line>256</line>
-          <properties class="ServiceJava.Parser.Parser" method="oldgetTranslation">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java</url>
-          <line>70</line>
-          <properties />
-          <option name="timeStamp" value="59" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java</url>
-          <line>83</line>
-          <properties />
-          <option name="timeStamp" value="60" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/ServiceJava/Database/Database.java</url>
-          <line>105</line>
+          <line>411</line>
           <properties />
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java</url>
-          <line>131</line>
-          <properties>
-            <option name="lambda-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java</url>
-          <line>130</line>
+          <url>file://$PROJECT_DIR$/src/main/java/ServiceJava/Database/Database.java</url>
+          <line>758</line>
           <properties />
-          <option name="timeStamp" value="65" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java</url>
-          <line>129</line>
-          <properties />
-          <option name="timeStamp" value="66" />
+          <option name="timeStamp" value="78" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -387,49 +360,87 @@
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
       <expression>
-        <expression-string>System.gc();</expression-string>
+        <expression-string>resultSet.getFloat(1)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>executorService.submit(() -&gt; Database.getInstance().getParametrizedTranslation(toTranslate, isSynonyms, isSentencesENRU, isincludeWordAudio, whichwordAudio, requestBy)).get(100000,TimeUnit.MILLISECONDS)</expression-string>
+        <expression-string>hashMap=(HashMap)json.getJSONArray(&quot;dict&quot;).toList().iterator().next();
+ ArrayList arrayList= (ArrayList) hashMap.get(&quot;terms&quot;);
+result=(String) arrayList.iterator().next()</expression-string>
+        <language-id>JAVA</language-id>
+        <custom-info>java.awt.List,java.util.ArrayList</custom-info>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>hashMap=(HashMap)json.getJSONArray(&quot;dict&quot;).toList().iterator().next();
+ ArrayList arrayList= (ArrayList) hashMap.get(&quot;terms&quot;);
+ arrayList.iterator().next()</expression-string>
+        <language-id>JAVA</language-id>
+        <custom-info>java.awt.List,java.util.ArrayList</custom-info>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>hashMap=(HashMap)json.getJSONArray(&quot;dict&quot;).toList().iterator().next();
+ ArrayList arrayList= (ArrayList) hashMap.get(&quot;terms&quot;);</expression-string>
+        <language-id>JAVA</language-id>
+        <custom-info>java.awt.List,java.util.ArrayList</custom-info>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>hashMap=(HashMap)json.getJSONArray(&quot;dict&quot;).toList().iterator().next();
+List list= (List) hashMap.get(&quot;terms&quot;);</expression-string>
+        <language-id>JAVA</language-id>
+        <custom-info>java.awt.List</custom-info>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>hashMap=(HashMap)json.getJSONArray(&quot;dict&quot;).toList().iterator().next();
+hashMap.get(&quot;terms&quot;);</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>executorService.submit(() -&gt; Database.getInstance().getParametrizedTranslation(toTranslate, isSynonyms, isSentencesENRU, isincludeWordAudio, whichwordAudio, requestBy)).get(1,TimeUnit.MILLISECONDS)</expression-string>
+        <expression-string>hashMap=(HashMap)json.getJSONArray(&quot;dict&quot;).toList().iterator().next();
+(String)hashMap.get(&quot;terms&quot;);</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>executorService.submit(() -&gt; Database.getInstance().getParametrizedTranslation(toTranslate, isSynonyms, isSentencesENRU, isincludeWordAudio, whichwordAudio, requestBy));</expression-string>
+        <expression-string>hashMap=(HashMap)json.getJSONArray(&quot;dict&quot;).toList().iterator().next();
+                result=(String)hashMap.get(&quot;terms&quot;);</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>JSON.put(&quot;sentencesENRU&quot;,fullTranslation.getSentencesInEnglishRussian());</expression-string>
+        <expression-string>URLConnection connection = new URL(url).openConnection();
+connection.setRequestProperty(&quot;User-Agent&quot;, &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11&quot;);
+connection.connect();
+
+BufferedReader r = new BufferedReader(new InputStreamReader(connection.getInputStream(), Charset.forName(&quot;UTF-8&quot;)));
+
+StringBuilder sb = new StringBuilder();
+String line;
+while ((line = r.readLine()) != null) {
+    sb.append(line);
+}
+JSONObject json = new JSONObject(sb.toString());
+HashMap hashMap = (HashMap) json.getJSONArray(&quot;sentences&quot;).toList().iterator().next();
+String result=(String) hashMap.get(&quot;trans&quot;);
+if(result==null||result.equals(&quot;&quot;)){
+    hashMap=(HashMap)json.getJSONArray(&quot;dict&quot;).toList().iterator().next();
+    hashMap.get(&quot;terms&quot;);
+}
+return (String)hashMap.get(&quot;terms&quot;).;</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
+    </expressions>
+    <expressions id="setValue">
       <expression>
-        <expression-string>JSON.opt(&quot;&quot;)</expression-string>
+        <expression-string>&quot;https://translate.google.sn/translate_a/t?client=dict-chrome-ex&amp;sl=en&amp;tl=ru&amp;q=a&amp;tbb=1&amp;ie=UTF-8&amp;oe=UTF-8&quot;</expression-string>
         <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>JSON.opt(&quot;a&quot;)</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>JSON.toString().length()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>JSON.getString().length();</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
@@ -573,33 +584,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="92" column="21" selection-start-line="92" selection-start-column="21" selection-end-line="92" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/concurrent/Future.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="327">
           <caret line="142" column="6" selection-start-line="142" selection-start-column="6" selection-end-line="142" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Parser/FullTranslation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="41" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
-          <folding>
-            <element signature="e#285#286#0" expanded="true" />
-            <element signature="e#349#350#0" expanded="true" />
-            <element signature="e#405#406#0" expanded="true" />
-            <element signature="e#448#449#0" expanded="true" />
-            <element signature="e#487#488#0" expanded="true" />
-            <element signature="e#551#552#0" expanded="true" />
-            <element signature="e#607#608#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -614,20 +602,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
           <caret line="140" column="6" selection-start-line="140" selection-start-column="6" selection-end-line="140" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Parser/Synonyms.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -652,31 +626,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java">
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/Boolean.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="131" column="113" lean-forward="true" selection-start-line="131" selection-start-column="113" selection-end-line="131" selection-end-column="113" />
+        <state relative-caret-position="2163">
+          <caret line="130" column="26" selection-start-line="130" selection-start-column="26" selection-end-line="130" selection-end-column="26" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#splitQuery#0;class#ConnectByHttp#0" />
+            <element signature="e#3828#3829#0" expanded="true" />
+            <element signature="e#3894#3895#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Database/Database.java">
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/String.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-388">
-          <caret line="95" column="27" selection-start-line="95" selection-start-column="27" selection-end-line="95" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="182">
+          <caret line="122" column="19" selection-start-line="122" selection-start-column="19" selection-end-line="122" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Parser/Synonyms.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Parser/FullTranslation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="26" column="41" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/util/HashMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10752">
+          <caret line="554" column="13" selection-start-line="554" selection-start-column="13" selection-end-line="554" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="16" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Parser/Parser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1271">
-          <caret line="248" selection-start-line="248" selection-end-line="248" />
+        <state relative-caret-position="596">
+          <caret line="237" lean-forward="true" selection-start-line="237" selection-end-line="237" />
           <folding>
             <element signature="method#oldgetTranslation#0;class#Parser#0" />
             <element signature="method#getAllSynonymsInRussian#0;class#Parser#0" />
@@ -684,10 +683,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/String.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="122" column="19" selection-start-line="122" selection-start-column="19" selection-end-line="122" selection-end-column="19" />
+        <state relative-caret-position="379">
+          <caret line="38" column="30" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/Database/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="34" column="13" lean-forward="true" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ServiceJava/ConnectByHttp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1025">
+          <caret line="50" column="30" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
+          <folding>
+            <element signature="method#splitQuery#0;class#ConnectByHttp#0" />
+          </folding>
         </state>
       </provider>
     </entry>

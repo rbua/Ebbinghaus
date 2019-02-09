@@ -19,9 +19,6 @@ public class Main {
         ConnectByHttp.start(Integer.parseInt(System.getenv("PORT")));
         //BufferedReader fileReader = new BufferedReader(new FileReader("C:/20k.txt"));
         //PrintWriter writeToFile = new PrintWriter("C:/test.txt", "UTF-8");
-
-Thread.yield();
-Thread.sleep(999999999);
         //   database.putAllFullTranslation(parser.getFullTranslation("go"));
 
 

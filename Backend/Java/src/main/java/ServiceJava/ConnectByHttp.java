@@ -49,18 +49,18 @@ public class ConnectByHttp {
 
     private static void handleRequest(HttpExchange exchange) throws IOException {
         JSONObject obj = null;
-        System.out.println("\nURL " + exchange.getRequestURI());
         Map<String, List<String>> query_pairs = null;
         URI requestURI = exchange.getRequestURI();
         try {
             query_pairs = splitQuery(exchange.getRequestURI());
+            if(query_pairs.get("word") != null && query_pairs.get("reqtype") != null){
             int secureKey = Integer.parseInt(query_pairs.get("key").iterator().next());
             byte[] bytes = query_pairs.get("word").iterator().next().getBytes("UTF-8");
             int localCheckKey = 0;
             for (int counter = 0; counter < query_pairs.get("word").iterator().next().getBytes("UTF-8").length; counter++) {
                 localCheckKey += VALIDATING_KEY - bytes[counter] ^ VALIDATING_KEY;
             }
-            if (localCheckKey != secureKey && (query_pairs.get("word") != null && query_pairs.get("reqtype") != null)) {
+            if (localCheckKey == secureKey ) {
                 System.out.println("KEY SUCCESS");
 
                 obj = processResponseToJSON(getFullTranslationForResponse(query_pairs), query_pairs.get("reqtype").iterator().next());
@@ -70,7 +70,12 @@ public class ConnectByHttp {
                 DataOutputStream outputStream = new DataOutputStream(exchange.getResponseBody());
                 outputStream.close();
                 return;
-            }
+            }}else { System.out.println("KEY FAIL");
+            exchange.sendResponseHeaders(403, 0);
+            DataOutputStream outputStream = new DataOutputStream(exchange.getResponseBody());
+            outputStream.close();
+            return;
+        }
 
         } catch (UnsupportedEncodingException | NumberFormatException | NullPointerException e) {
             exchange.sendResponseHeaders(409, 0);
@@ -90,7 +95,7 @@ public class ConnectByHttp {
         Database database = Database.getInstance();
         String toTranslate = query_pairs.get("word").get(0);
         String type = query_pairs.get("reqtype").get(0);
-        System.out.println(toTranslate + "  request№  " + Thread.currentThread().getName());
+        System.out.println(toTranslate);
         FullTranslation fullTranslation = null;
         try {
             switch (type) {
@@ -121,21 +126,40 @@ public class ConnectByHttp {
                     fullTranslation = parser.getSimpleTranslationOfEverything(toTranslate);
                     break;
                 case "parametrizedWordTranslation":
-                    if (query_pairs.get("synonyms") != null && query_pairs.get("sentencesENRU") != null && query_pairs.get("wordAudio") != null && query_pairs.get("requestBy") != null && query_pairs.get("includeWordAudio") != null && toTranslate != null) {
+                    if (query_pairs.get("synonyms") != null && query_pairs.get("sentencesENRU") != null && query_pairs.get("requestBy") != null && query_pairs.get("includeWordAudio") != null && toTranslate != null) {
                         if (toTranslate.matches(".* .*")) break;
                         boolean isSynonyms = Boolean.parseBoolean(query_pairs.get("synonyms").iterator().next());
                         boolean isSentencesENRU = Boolean.parseBoolean(query_pairs.get("sentencesENRU").iterator().next());
                         boolean isincludeWordAudio = Boolean.parseBoolean(query_pairs.get("includeWordAudio").iterator().next());
-                        String whichwordAudio = query_pairs.get("wordAudio").iterator().next();
+                        String whichwordAudio;
+                        if (isincludeWordAudio && query_pairs.get("wordAudio") != null)
+                            whichwordAudio = query_pairs.get("wordAudio").iterator().next();
+                        else  whichwordAudio="";
                         String requestBy = query_pairs.get("requestBy").iterator().next();
                         ExecutorService executorService = Executors.newFixedThreadPool(2);
+                        Future futureParser=null;
                         Future futureDatabase = executorService.submit(() -> Database.getInstance().getParametrizedTranslation(toTranslate, isSynonyms, isSentencesENRU, isincludeWordAudio, whichwordAudio, requestBy));
-                        Future futureParser = executorService.submit(() -> Parser.getInstance().getParametrizedTranslation(toTranslate, isSynonyms, isSentencesENRU, isincludeWordAudio, whichwordAudio));
-                        fullTranslation = (FullTranslation) futureDatabase.get(5000, TimeUnit.MILLISECONDS);
-                        if (fullTranslation == null) {
-                           fullTranslation = (FullTranslation) futureParser.get(5000, TimeUnit.MILLISECONDS);
+                       if(!requestBy.equals("ID")&&!requestBy.equals("RUword"))
+                        futureParser = executorService.submit(() -> Parser.getInstance().getParametrizedTranslation(toTranslate, isSynonyms, isSentencesENRU, isincludeWordAudio, whichwordAudio));
+                        if (futureParser!=null) {
+                            fullTranslation = (FullTranslation) futureParser.get(10000, TimeUnit.MILLISECONDS);
+                            if (isSynonyms && isSentencesENRU && isincludeWordAudio && whichwordAudio.equals("BOTH") & fullTranslation.isSuccessful()) {
+                                FullTranslation newFull = fullTranslation;
+                                executorService.submit(() -> Database.getInstance().putAllFullTranslation(newFull));
+                            }
                         }
+                        if(fullTranslation == null||!fullTranslation.isSuccessful())
+                       fullTranslation = (FullTranslation) futureDatabase.get(10000, TimeUnit.MILLISECONDS);
+
                         executorService.shutdown();
+                    }
+                    break;
+                case "putToCache":
+                    if(toTranslate==null||toTranslate.matches(".*\\p{InCyrillic}.*")||toTranslate.matches(".* .*")||toTranslate.equals("")) break;
+                    if(Database.getInstance().putAllFullTranslation(Parser.getInstance().getParametrizedTranslation(toTranslate, true, true, true, "BOTH"))) {
+                        fullTranslation = new FullTranslation("", "");
+                        fullTranslation.setSuccessful(true);
+                        fullTranslation.setFromCache(false);
                     }
                     break;
                 default:
@@ -169,7 +193,9 @@ public class ConnectByHttp {
                 getLightJson(fullTranslation, JSON);
                 break;
             case "parametrizedWordTranslation":
-                getparametrizedJson(fullTranslation, JSON);
+                break;
+            case "putToCache":
+                break;
             default:
                 getLightJson(fullTranslation, JSON);
         }
@@ -180,9 +206,9 @@ public class ConnectByHttp {
 
     private static JSONObject getparametrizedJson(FullTranslation fullTranslation, JSONObject JSON) {
         if (fullTranslation.getWordENAudioURLGB() != null)
-            JSON.put("wordAudio", fullTranslation.getWordENAudioURLGB());
+            JSON.put("wordAudioGB", fullTranslation.getWordENAudioURLGB());
         if (fullTranslation.getWordENAudioURLUS() != null)
-            JSON.put("wordAudio", fullTranslation.getWordENAudioURLUS());
+            JSON.put("wordAudioUS", fullTranslation.getWordENAudioURLUS());
         if (fullTranslation.getSynonyms() != null) {
             JSONObject arrayOfWordsCategories = new JSONObject();
             for (Synonyms synonyms : fullTranslation.getSynonyms()) {

@@ -14,6 +14,7 @@ import java.net.ConnectException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.concurrent.*;
@@ -172,14 +173,21 @@ public class Parser {
         Future FwordENAudio = null;
         Future Fsynonyms = null;
         Future Fsentences = null;
-        boolean US;
-        if (includeWordAudio && whichWordAudio.equals("US"))
-            US = true;
-        else US = false;
         ExecutorService executorService = Executors.newFixedThreadPool(4);
         FsimpleTranslation = executorService.submit(() -> getSimpleTranslationOfEverything(toTranslate));
         if (includeWordAudio)
-            FwordENAudio = executorService.submit(() -> getWordENAudio(toTranslate, US));
+            switch (whichWordAudio){
+                case "GB":
+                    FwordENAudio = executorService.submit(() -> getWordENAudio(toTranslate, false));
+                    break;
+                case "US":
+                    FwordENAudio = executorService.submit(() -> getWordENAudio(toTranslate, true));
+                    break;
+                case "BOTH":
+                    FwordENAudio = executorService.submit(() -> getWordENAudio(toTranslate, true));
+                    break;
+
+            }
         if (isSynonyms)
             Fsynonyms = executorService.submit(() -> getSynonymsFromDiv(toTranslate));
         if (isSentencesENRU)
@@ -188,10 +196,18 @@ public class Parser {
 
             fullTranslation = (FullTranslation) FsimpleTranslation.get();
             if (includeWordAudio)
-                if (US)
-                    fullTranslation.setWordENAudioURLUS((String) FwordENAudio.get(5000, TimeUnit.MILLISECONDS));
-                else
-                    fullTranslation.setWordENAudioURLGB((String) FwordENAudio.get(5000, TimeUnit.MILLISECONDS));
+                switch (whichWordAudio){
+                    case "US":
+                        fullTranslation.setWordENAudioURLUS((String) FwordENAudio.get(5000, TimeUnit.MILLISECONDS));
+                        break;
+                    case "GB":
+                        fullTranslation.setWordENAudioURLGB((String) FwordENAudio.get(5000, TimeUnit.MILLISECONDS));
+                        break;
+                    case "BOTH":
+                        fullTranslation.setWordENAudioURLUS((String) FwordENAudio.get(5000, TimeUnit.MILLISECONDS));
+                        fullTranslation.setWordENAudioURLGB(getWordENAudio(toTranslate,false));
+                        break;
+                }
             if (isSynonyms) fullTranslation.setSynonyms((Synonyms[]) Fsynonyms.get(5000, TimeUnit.MILLISECONDS));
             if (isSentencesENRU) fullTranslation.setSentencesInEnglishRussian((String[][]) Fsentences.get(5000, TimeUnit.MILLISECONDS));
             fullTranslation.setSuccessful(true);
@@ -214,7 +230,7 @@ public class Parser {
         fullTranslation.setSuccessful(true);
         fullTranslation.setFromCache(false);
 
-        if (fullTranslation == null || !fullTranslation.getTranslatedWord().matches(".*\\p{InCyrillic}.*")) {
+        if (fullTranslation == null ||fullTranslation.getTranslatedWord().equals("")|| !fullTranslation.getTranslatedWord().matches(".*\\p{InCyrillic}.*")) {
             fullTranslation = new FullTranslation("", "");
             fullTranslation.setFromCache(false);
             fullTranslation.setSuccessful(false);
@@ -241,7 +257,13 @@ public class Parser {
             }
             JSONObject json = new JSONObject(sb.toString());
             HashMap hashMap = (HashMap) json.getJSONArray("sentences").toList().iterator().next();
-            return (String) hashMap.get("trans");
+            String result=(String) hashMap.get("trans");
+            if(result==null||result.equals("")){
+                hashMap=(HashMap)json.getJSONArray("dict").toList().iterator().next();
+                ArrayList arrayList= (ArrayList) hashMap.get("terms");
+                result=(String) arrayList.iterator().next();
+            }
+            return result;
         }catch (ConnectException e) {
             e.printStackTrace();
             return "";

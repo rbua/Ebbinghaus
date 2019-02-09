@@ -30,11 +30,11 @@ public class Database {
     }
 
     private Database() {
-        // original String url = "jdbc:mysql://remotemysql.com:3306/FQSvAFRC1n?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-        String url = "jdbc:mysql://localhost:3306/dictionary?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+        String url = "jdbc:mysql://remotemysql.com:3306/FQSvAFRC1n?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+        //NOT original String url = "jdbc:mysql://localhost:3306/dictionary?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
         try {
-            // original connectionToDatabase = DriverManager.getConnection(url, "FQSvAFRC1n", "rxtMdHq0UO");
-            connectionToDatabase = DriverManager.getConnection(url, "root", "q1w2e3r4t5y6");
+            connectionToDatabase = DriverManager.getConnection(url, "FQSvAFRC1n", "rxtMdHq0UO");
+            //NOT original connectionToDatabase = DriverManager.getConnection(url, "root", "q1w2e3r4t5y6");
             if (!connectionToDatabase.isClosed()) connected = true;
         } catch (SQLException | CJCommunicationsException e) {
             connected = false;
@@ -45,8 +45,8 @@ public class Database {
 
 
     public FullTranslation getSimpleWordTranslationById(int IDofWord) {
-        if(!connected){
-            FullTranslation fullTranslation=new FullTranslation("","");
+        if (!connected) {
+            FullTranslation fullTranslation = new FullTranslation("", "");
             fullTranslation.setSuccessful(false);
             fullTranslation.setFromCache(false);
             return fullTranslation;
@@ -93,8 +93,8 @@ public class Database {
         }
     }
 
-    public FullTranslation getParametrizedTranslation(String toTranslateValue, boolean isSynonyms, boolean isSentencesENRU,boolean includeWordAudio, String whichWordAudio, String requestBy) {
-        if(!connected){
+    public FullTranslation getParametrizedTranslation(String toTranslateValue, boolean isSynonyms, boolean isSentencesENRU, boolean includeWordAudio, String whichWordAudio, String requestBy) {
+        if (!connected) {
             return null;
         }
         FullTranslation fullTranslation = null;
@@ -118,6 +118,20 @@ public class Database {
                 fullTranslation = new FullTranslation(translationPair[0], translationPair[1]);
                 fullTranslation.setFromCache(true);
                 fullTranslation.setSuccessful(true);
+                if (includeWordAudio) {
+                    switch (whichWordAudio) {
+                        case "GB":
+                            fullTranslation.setWordENAudioURLGB(getWordAudio(fullTranslation.getWordToTranslate(),false));
+                            break;
+                        case "US":
+                            fullTranslation.setWordENAudioURLUS(getWordAudio(fullTranslation.getWordToTranslate(),true));
+                            break;
+                        case "BOTH":
+                            fullTranslation.setWordENAudioURLUS(getWordAudio(fullTranslation.getWordToTranslate(),true));
+                            fullTranslation.setWordENAudioURLGB(getWordAudio(fullTranslation.getWordToTranslate(),false));
+                            break;
+                    }
+                }
                 if (isSynonyms) {
                     fullTranslation.setSynonyms(getSynonyms(translationPair[0]));
                 }
@@ -132,66 +146,88 @@ public class Database {
         }
     }
 
-private String[][] getSentences(String toTranslate){
-    if(!connected){
-        return null;
-    }
-    try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT * FROM EN_RU_word_translation WHERE word=?;");
-         PreparedStatement preparedStatementForSentencesSELECT = connectionToDatabase.prepareStatement("SELECT * FROM sentences WHERE sentences_ID=?;");
-         PreparedStatement preparedStatementForTranslationIdALLkeySELECT = connectionToDatabase.prepareStatement("SELECT * FROM translation_ID_ALL_key WHERE translation_ID=?");) {
-        preparedStatementForEN_RU_word_translationSELECT.setString(1, toTranslate);
-        ResultSet resultSet = preparedStatementForEN_RU_word_translationSELECT.executeQuery();
-        /**  IF NO SUCH WORD-> EXIT*/
-        if (!resultSet.first()) return null;
-        int translation_ID = resultSet.getInt(1);
-        resultSet.close();
-        /**  SELECT ALL ID*/
-        preparedStatementForTranslationIdALLkeySELECT.setInt(1, translation_ID);
-        ResultSet IdToSelectSET = preparedStatementForTranslationIdALLkeySELECT.executeQuery();
-
-        final int SIZE_OF_SENTENCES_EN_RU = 40;
-        String[][] sentencesInEnglishRussian = new String[2][];
-        Set sentences_IDs = new HashSet();
-        while (IdToSelectSET.next()) {
-            if (IdToSelectSET.getInt(4) != 0) sentences_IDs.add(IdToSelectSET.getInt(4));
+    private String getWordAudio(String toTranslate, boolean US) {
+        if (!connected) {
+            return null;
         }
-        IdToSelectSET.close();
-        /**  SELECT ALL SENTENCES*/
-        Iterator iterator = sentences_IDs.iterator();
-        String[][] localSentencesInENRU = new String[2][SIZE_OF_SENTENCES_EN_RU];
-        int totalAmountOfSentences = 0;
-        while (iterator.hasNext()) {
-            int sentenceID = (int) iterator.next();
-            preparedStatementForSentencesSELECT.setInt(1, sentenceID);
-            resultSet = preparedStatementForSentencesSELECT.executeQuery();
-            while (resultSet.next()) {
-                localSentencesInENRU[0][totalAmountOfSentences] = resultSet.getString(2);
-                localSentencesInENRU[1][totalAmountOfSentences] = resultSet.getString(3);
-                totalAmountOfSentences++;
-            }
+        try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT * FROM EN_RU_word_translation WHERE word=?;");) {
+            preparedStatementForEN_RU_word_translationSELECT.setString(1, toTranslate);
+            ResultSet resultSet = preparedStatementForEN_RU_word_translationSELECT.executeQuery();
+            resultSet.first();
+            String result = null;
+            if (US)
+                result = resultSet.getString(4);
+            else
+                result = resultSet.getString(5);
             resultSet.close();
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            connected = false;
+            return null;
         }
-        sentencesInEnglishRussian = new String[2][totalAmountOfSentences];
-        for (int counter = 0; counter < totalAmountOfSentences; counter++) {
-            sentencesInEnglishRussian[0][counter] = localSentencesInENRU[0][counter];
-            sentencesInEnglishRussian[1][counter] = localSentencesInENRU[1][counter];
-        }
-return sentencesInEnglishRussian;
-
-
-    } catch (SQLException e) {
-        e.printStackTrace();
-        return null;
-    } catch (NumberFormatException e) {
-        e.printStackTrace();
-        return null;
     }
 
-}
+    private String[][] getSentences(String toTranslate) {
+        if (!connected) {
+            return null;
+        }
+        try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT * FROM EN_RU_word_translation WHERE word=?;");
+             PreparedStatement preparedStatementForSentencesSELECT = connectionToDatabase.prepareStatement("SELECT * FROM sentences WHERE sentences_ID=?;");
+             PreparedStatement preparedStatementForTranslationIdALLkeySELECT = connectionToDatabase.prepareStatement("SELECT * FROM translation_ID_ALL_key WHERE translation_ID=?");) {
+            preparedStatementForEN_RU_word_translationSELECT.setString(1, toTranslate);
+            ResultSet resultSet = preparedStatementForEN_RU_word_translationSELECT.executeQuery();
+            /**  IF NO SUCH WORD-> EXIT*/
+            if (!resultSet.first()) return null;
+            int translation_ID = resultSet.getInt(1);
+            resultSet.close();
+            /**  SELECT ALL ID*/
+            preparedStatementForTranslationIdALLkeySELECT.setInt(1, translation_ID);
+            ResultSet IdToSelectSET = preparedStatementForTranslationIdALLkeySELECT.executeQuery();
+
+            final int SIZE_OF_SENTENCES_EN_RU = 40;
+            String[][] sentencesInEnglishRussian = new String[2][];
+            Set sentences_IDs = new HashSet();
+            while (IdToSelectSET.next()) {
+                if (IdToSelectSET.getInt(4) != 0) sentences_IDs.add(IdToSelectSET.getInt(4));
+            }
+            IdToSelectSET.close();
+            /**  SELECT ALL SENTENCES*/
+            Iterator iterator = sentences_IDs.iterator();
+            String[][] localSentencesInENRU = new String[2][SIZE_OF_SENTENCES_EN_RU];
+            int totalAmountOfSentences = 0;
+            while (iterator.hasNext()) {
+                int sentenceID = (int) iterator.next();
+                preparedStatementForSentencesSELECT.setInt(1, sentenceID);
+                resultSet = preparedStatementForSentencesSELECT.executeQuery();
+                while (resultSet.next()) {
+                    localSentencesInENRU[0][totalAmountOfSentences] = resultSet.getString(2);
+                    localSentencesInENRU[1][totalAmountOfSentences] = resultSet.getString(3);
+                    totalAmountOfSentences++;
+                }
+                resultSet.close();
+            }
+            sentencesInEnglishRussian = new String[2][totalAmountOfSentences];
+            for (int counter = 0; counter < totalAmountOfSentences; counter++) {
+                sentencesInEnglishRussian[0][counter] = localSentencesInENRU[0][counter];
+                sentencesInEnglishRussian[1][counter] = localSentencesInENRU[1][counter];
+            }
+            return sentencesInEnglishRussian;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
     private Synonyms[] getSynonyms(String toTranslate) {
-        if(!connected){
-           return null;
+        if (!connected) {
+            return null;
         }
         try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT * FROM EN_RU_word_translation WHERE word=?;");
              PreparedStatement preparedStatementForWord_categories_translationSELECT = connectionToDatabase.prepareStatement("SELECT * FROM word_categories_translation WHERE categories_ID=? ORDER BY word_category_id;");
@@ -275,61 +311,61 @@ return sentencesInEnglishRussian;
 
 
     private String[] getTranslationPairbyToTranslate(String toTranslate) {
-        if(!connected){
+        if (!connected) {
             return null;
         }
         try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT * FROM EN_RU_word_translation WHERE word=?;");) {
             preparedStatementForEN_RU_word_translationSELECT.setString(1, toTranslate);
             ResultSet resultSet = preparedStatementForEN_RU_word_translationSELECT.executeQuery();
-            resultSet.first();
-            String[] result =new String[]{resultSet.getString(2), resultSet.getString(3)};
+            if(!resultSet.first())return null;
+            String[] result = new String[]{resultSet.getString(2), resultSet.getString(3)};
             resultSet.close();
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
-            connected=false;
+            connected = false;
             return null;
         }
     }
 
     private String[] getTranslationPairbyTranslated(String translated) {
-        if(!connected){
+        if (!connected) {
             return null;
         }
         try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT * FROM EN_RU_word_translation WHERE translated=?;");) {
             preparedStatementForEN_RU_word_translationSELECT.setString(1, translated);
             ResultSet resultSet = preparedStatementForEN_RU_word_translationSELECT.executeQuery();
-            resultSet.first();
-            String[] result =new String[]{resultSet.getString(2), resultSet.getString(3)};
+            if(!resultSet.first())return null;
+            String[] result = new String[]{resultSet.getString(2), resultSet.getString(3)};
             resultSet.close();
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
-            connected=false;
+            connected = false;
             return null;
         }
     }
 
     private String[] getTranslationPairbyId(int translationID) {
-        if(!connected){
+        if (!connected) {
             return null;
         }
         try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT * FROM EN_RU_word_translation WHERE translation_ID=?;");) {
             preparedStatementForEN_RU_word_translationSELECT.setInt(1, translationID);
             ResultSet resultSet = preparedStatementForEN_RU_word_translationSELECT.executeQuery();
-            resultSet.first();
-            String[] result =new String[]{resultSet.getString(2), resultSet.getString(3)};
+            if(!resultSet.first())return null;
+            String[] result = new String[]{resultSet.getString(2), resultSet.getString(3)};
             resultSet.close();
             return result;
         } catch (SQLException e) {
             e.printStackTrace();
-            connected=false;
+            connected = false;
             return null;
         }
     }
 
     public FullTranslation getFullTranslation(String wordToTranslate) {
-        if(!connected){
+        if (!connected) {
             return null;
         }
         FullTranslation fullTranslation = null;
@@ -501,7 +537,9 @@ return sentencesInEnglishRussian;
     }
 
     synchronized public boolean putAllFullTranslation(FullTranslation fullTranslation) {
-        if (fullTranslation == null) return false;
+        long start = System.currentTimeMillis();
+        if(!connected)return false;
+        if (fullTranslation == null||!fullTranslation.isSuccessful()) return false;
         checkDatabaseSize();
         if (!freeSpace) return false;
         try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT translation_ID FROM EN_RU_word_translation WHERE word=?;");
@@ -539,6 +577,7 @@ return sentencesInEnglishRussian;
                 preparedStatementForEN_RU_word_translationINSERT.setString(4, fullTranslation.getWordENAudioURLGB());
                 preparedStatementForEN_RU_word_translationINSERT.executeUpdate();
             } else {
+                resultSetEN_RU_word_translation.close();
                 return true;
             }
             int counter = 0;
@@ -709,7 +748,8 @@ return sentencesInEnglishRussian;
         } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
             e.printStackTrace();
         }
-
+        long end = System.currentTimeMillis();
+        System.out.println("INSERTED for: "+(end-start)+" MS");
         return true;
     }
 

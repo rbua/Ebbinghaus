@@ -1,0 +1,87 @@
+Java RESTv1.0
+--------------------------
+GENERAL
+
+All http key&value must be provided in each request.
+If there was a missing key&value->server will response with 403
+If your request have invalid key(token)->403
+If your request provide an empty value for word->409(proccessing fail)
+If your request provide non-existent reqtype->server will response with Successful:false(if all previous rules were followed)
+--------------------------
+
+METHODS
+--------------------------
+METHOD simpleTranslation
+
+This REST method can translate everything(one word or more)
+reqtype=simpleTranslation
+If something is wrong in the proccessing of the message it will response with Successful:false
+If provided word can`t be translated->Successful:false
+If EVEN one of the provided words can be translated->Successful:true
+Example of the request:
+https://tempjavadictapp.herokuapp.com/dictionary?word=The%20best%20way%20to%20learn%20is%20to%20fail%20often&key=6340&reqtype=simpleTranslation
+%20 is an http encoding of a space " "
+Example of the response
+{"FromCache":false,"wordToTranslate":"The best way to learn is to fail often","translation":"Лучший способ учиться - часто терпеть неудачу","Successful":true}
+--------------------------
+
+METHOD wordById
+
+This REST method can get back a word+translation by its ID in the database
+reqtype=wordById
+If something is wrong in the proccessing of the message it will response with Successful:false
+If provided ID that doesn`t exist->Successful:false
+If database went DOWN the program will disconect from it so it will always return ->Successful:false
+If everthing is ok->Successful:true
+Example of request
+https://tempjavadictapp.herokuapp.com/dictionary?word=6&key=206&reqtype=wordById
+Example of response
+{"wordToTranslate":"cat","FromCache":true,"translation":"кошка","Successful":true}
+--------------------------
+
+METHOD parametrizedWordTranslation
+
+requestBy:ID/ENword/RUword(ID AND RUword is only available for database for now)
+includeWordAudio:true/false
+wordAudio:"US"/"GB"/"BOTH"
+synonyms:true/false
+sentencesENRU:true/false
+There are all types of key:value pairs that can be inputed into request.
+includeWordAudio flag must be true if you want to receive any wordAudio with accent that you need to provide.
+If audio for accent will not be found ->no wordAudioGB/US keys wil be sended(be aware of that)
+If you set an option wordAudio to "BOTH" and the program will not found one of the accent it will send all what it found.(for example if you want BOTH accents but only US was found you will get NO key for GB accent and 1 key with US(if it was found)
+If you have missed one of the keys for request(With correct key)->Successful:false
+With incorrect key->409 error
+If you provided wrong key(irrespectively of values of another keys)->409 error
+If you provided wrong value for key wordAudio->no wordAudioGB/US keys will be sended
+If no audio for that accent:no wordAudioGB/US keys wil be sended
+If you will search by using RUword and there is nothing that will satisfy this criteria in the database->Successful:false(because parser is not configured for searching Russian words yet)
+
+Example of Request:
+http://tempjavadictapp.herokuapp.com/dictionary?word=apple&key=754&synonyms=true&sentencesENRU=true&includeWordAudio=true&wordAudio=US&requestBy=ENword&reqtype=parametrizedWordTranslation
+You can see JSON response by following this link
+{"wordToTranslate":"apple","FromCache":false,"synonyms":{"apple прилаг":["яблочный"],"apple имя существительное":["яблоко"]},"translation":"яблоко","sentencesENRU":[[" apple does not fall far from the tree"],[" яблоко от яблони недалеко падает"]],"Successful":true,"wordAudioUS":"https://myefe.ru/data/sw/cwords/us/a/apple.mp3"}
+[]-it is an array
+As you can see here synonyms are provided in form "ENword+wordCategory":array of translations
+Sentences are provided in an array of two arrays. First one is EN and the second one is RU respectively. ENarray[ i ] =RUarray[ i ]
+you can try other key:values combination to get what you want . Here are some other examples:
+http://tempjavadictapp.herokuapp.com/dictionary?word=apple&key=754&synonyms=true&sentencesENRU=true&includeWordAudio=true&wordAudio=GB&requestBy=ENword&reqtype=parametrizedWordTranslation
+http://tempjavadictapp.herokuapp.com/dictionary?word=apple&key=754&synonyms=true&sentencesENRU=false&includeWordAudio=true&wordAudio=BOTH&requestBy=ENword&reqtype=parametrizedWordTranslation
+Response for the last one :
+{"wordAudioGB":"https://myefe.ru/data/sw/words/gb/a/apple__gb_1.mp3","wordToTranslate":"apple","FromCache":false,"synonyms":{"apple прилаг":["яблочный"],"apple имя существительное":["яблоко"]},"translation":"яблоко","Successful":true,"wordAudioUS":"https://myefe.ru/data/sw/cwords/us/a/apple.mp3"}
+--------------------------
+
+METHOD putToCache
+
+This method allows you to put translation of word in English into database.The program will save all sentences, audios and synonyms automatically.
+If you provided word that already exist ->Successful:true
+If word was added to the database->Successful:true
+If database is disconnected or some error occured or word can`t be translated->Successful:false
+Please pay attention that IF in your request are more than 1 word OR EVEN 1 Cyrilic symbol OR space symbol OR empty string->Successful:false
+Request:
+http://tempjavadictapp.herokuapp.com/dictionary?word=the&key=449&reqtype=putToCache
+Response:
+{Successful:true,FromCache:false}
+
+--------------------------
+©Designed by Dmytro Narepeha and Roman Bondarenko

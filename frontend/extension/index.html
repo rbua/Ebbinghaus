@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8">
+    <title> Dictionary </title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+	<style src="contentscript.css"></style>
+  <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+
+    <div class="username">
+      Username
+    </div>
+
+    <div class="loging">
+      <button class="log-btn" type="button" name="button">Log in</button>
+      <div class="login-form">
+          <form method="post" id="log-form">
+
+          <h3 style="text-align: center;"> Log into MagiWord </h3>
+
+          <div class="input-container"> <input class="input-login" placeholder="E-mail" type="email" name="email" required> </div>
+
+          <div class="input-container"> <input class="input-password" placeholder="Password" type="password" name="password" required> </div>
+
+          <input id="log-button" type="submit" value="Submit" class="submit">
+
+        </form>
+      </div>
+    </div>
+
+    <div>
+  	  <h1><a class="ar" href="http://magiword.zzz.com.ua">MagiWord</a></h1>
+  	</div>
+
+	<div>
+    <textarea class="textArea" name="textarea"
+   rows="5" cols="30"
+   placeholder="Enter word."></textarea>
+	</div>
+  <div class="buttons">
+    <div class="translateWord">
+      <button type="submit" class="action-btn" id="transl">Translate</button>
+    </div>
+    <div class="addWord">
+      <button type="submit" class="action-btn">Add to Dictionary</button>
+    </div>
+  </div>
+
+  <div class="translationArea">
+     <div class="main-popover">
+       <div class="bubble-content">
+         <div class="translations">
+           <div class="tr-w">
+              <span class="word-to-tr"></span>
+           </div>
+           <div class="tr-t">
+             <span class="translation-word">translation </span>
+           </div>
+         </div>
+          <div class="audio">
+          <a class="audio-file" href="" target="_blank">Прослушать</a>
+          </div>
+         <div class="parts-of-speech">
+           <table>
+           </table>
+         </div>
+         <div class="sentences-start">
+           <img class="dropdown", src="https://img.icons8.com/ios/24/000000/sort-down-filled.png">
+           <span class="text-sent">Предложения с этим словом:</span>
+         </div>
+         <div class="sentences-end">
+         </div>
+       </div>
+     </div>
+  </div>
+
+
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/notification.js"></script>
+  </body>
+</html>

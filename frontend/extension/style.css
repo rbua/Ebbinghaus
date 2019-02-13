@@ -1,0 +1,168 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  border: 3px solid rgba(20,50,100);;
+  font-family: 'Roboto', sans-serif;
+}
+
+a  {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+  color: rgb(0, 64, 150);
+  text-align: center;
+}
+
+textarea {
+  resize: none;
+  background-color: ivory;
+}
+
+.textArea {
+  background:
+  linear-gradient(135deg, rgba(250, 250, 250,0.95), rgba(250,250,250,0.95)),
+url(image/eng-img.PNG) 50% 50%;
+}
+
+.translationArea {
+  background:
+  linear-gradient(135deg, rgba(250, 250, 250,0.95), rgba(250,250,250,0.95)),
+url(image/rus-img.PNG) 50% 50%;
+}
+
+.emoji-flag {
+  width: 16px;
+  height: 10px;
+}
+
+.action-btn {
+  background-color: rgba(20,50,100);
+  color: white;
+  padding: 10px 10px;
+  margin: 5px 0;
+  border: 2px solid #fff;
+  cursor: pointer;
+  width: 116.5px;
+  opacity: 0.9;
+  height: 50px;
+}
+
+.translateWord {
+
+}
+
+.buttons {
+  display: flex;
+  margin: 2px;
+}
+
+.username {
+  height: 24px;
+  line-height: 24px;
+  border-bottom: 2px solid rgba(20,50,100);
+  border-left: 2px solid rgba(20,50,100);
+  width: 50%;
+  float: right;
+  text-align: center;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.log-btn {
+  height: 24px;
+  line-height: 24px;
+  width: 50%;
+  background: rgba(20,50,100);
+  color:#fff;
+  border:none;
+  padding:0 2em;
+  cursor:pointer;
+  outline:none;
+}
+
+.login-form {
+  display: none;
+  position: relative;
+  padding: 0 8px 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+.login-form.opened {
+  display: block;
+}
+
+.logged-in .login-form {
+  display: none;
+}
+
+.input-login,
+.input-password {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+}
+
+.submit {
+  display: block;
+  padding: 8px 12px;
+  color: #fff;
+  background: rgba(20,50,100);
+  border: none;
+  font-weight: bold;
+}
+
+.tr-t, .tr-w {
+  text-align: center;
+  font-style: oblique;
+  font-size: 2em;
+}
+
+table {
+  margin-top: 8px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.tres, .wres {
+  font-style: oblique;
+  border: 1px solid rgb(20,50,100);
+  width: 100%;
+}
+
+.audio {
+  text-align: center;
+}
+
+.text-sent {
+  font-size: 1.2em;
+  font-style: oblique;
+}
+
+.sentences-end {
+    font-style: italic;
+    border-top: 1px solid rgb(20,50,100);
+}
+
+.brd-s{
+    border-bottom: 1px solid rgb(20,50,100);
+}
+
+.dropdown {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 4px;
+  transition: all .4s;
+  cursor: pointer;
+}
+
+.dropdown.opened {
+  transform: rotate(180deg);
+}

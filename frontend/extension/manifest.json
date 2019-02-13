@@ -1,0 +1,39 @@
+{
+  "name": "Hello Extensions",
+  "description" : "Base Level Extension",
+  "version": "1.0",
+  "web_accessible_resources": ["http://transleet.somee.com/httpHndlr.ashx"],
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_icon": "sound.png",
+    "default_title": "Test"
+  },
+  "permissions": [
+     "tabs",
+     "activeTab",
+     "<all_urls>"
+   ],
+  "manifest_version": 2,
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      },
+      "description": "Opens hello.html"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["contentscript.css"],
+	    "js": ["js/jquery-3.3.1.min.js", "contentscript.js"],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": ["background.js"]
+  }
+}

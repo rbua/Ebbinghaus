@@ -1,5 +1,6 @@
 package ServiceJava.Parser;
 
+import ServiceJava.ConnectByHttp;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -77,6 +78,7 @@ public class Parser {
         try {
             String url = "https://www.babla.ru/английский-русский/" + toTranslate;
             Document document = Jsoup.connect(url).header("Accept-Encoding", "gzip, deflate").userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0").maxBodySize(0).timeout(0).get();
+            ConnectByHttp.appendTrafficBytes(document.text().length() + url.length());
             Elements elements = document.getAllElements();
             Elements localElements = elements.select("div.sense-group:eq(2)>div.dict-entry>div.dict-example");
             int ammountOfElements = localElements.size();
@@ -104,6 +106,7 @@ public class Parser {
         try {
             String url = "https://www.babla.ru/английский-русский/" + toTranslate;
             Document document = Jsoup.connect(url).header("Accept-Encoding", "gzip, deflate").userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0").maxBodySize(0).timeout(0).get();
+            ConnectByHttp.appendTrafficBytes(document.text().length() + url.length());
             Elements elements = document.getAllElements();
             Elements localElements1 = elements.select("div.quick-results").first().children();
             Elements localElements2 = localElements1.clone();
@@ -146,6 +149,7 @@ public class Parser {
             connection = new URL(url).openConnection();
             connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
             connection.connect();
+            ConnectByHttp.appendTrafficBytes(url.length() + url2.length());
             if (connection.getHeaderField(null).contains("200 OK")) return url;
             else {
                 connection = new URL(url2).openConnection();
@@ -176,7 +180,7 @@ public class Parser {
         ExecutorService executorService = Executors.newFixedThreadPool(4);
         FsimpleTranslation = executorService.submit(() -> getSimpleTranslationOfEverything(toTranslate));
         if (includeWordAudio)
-            switch (whichWordAudio){
+            switch (whichWordAudio) {
                 case "GB":
                     FwordENAudio = executorService.submit(() -> getWordENAudio(toTranslate, false));
                     break;
@@ -196,7 +200,7 @@ public class Parser {
 
             fullTranslation = (FullTranslation) FsimpleTranslation.get();
             if (includeWordAudio)
-                switch (whichWordAudio){
+                switch (whichWordAudio) {
                     case "US":
                         fullTranslation.setWordENAudioURLUS((String) FwordENAudio.get(5000, TimeUnit.MILLISECONDS));
                         break;
@@ -205,16 +209,15 @@ public class Parser {
                         break;
                     case "BOTH":
                         fullTranslation.setWordENAudioURLUS((String) FwordENAudio.get(5000, TimeUnit.MILLISECONDS));
-                        fullTranslation.setWordENAudioURLGB(getWordENAudio(toTranslate,false));
+                        fullTranslation.setWordENAudioURLGB(getWordENAudio(toTranslate, false));
                         break;
                 }
             if (isSynonyms) fullTranslation.setSynonyms((Synonyms[]) Fsynonyms.get(5000, TimeUnit.MILLISECONDS));
-            if (isSentencesENRU) fullTranslation.setSentencesInEnglishRussian((String[][]) Fsentences.get(5000, TimeUnit.MILLISECONDS));
-            fullTranslation.setSuccessful(true);
-            fullTranslation.setFromCache(false);
+            if (isSentencesENRU)
+                fullTranslation.setSentencesInEnglishRussian((String[][]) Fsentences.get(5000, TimeUnit.MILLISECONDS));
             executorService.shutdown();
             return fullTranslation;
-        } catch (InterruptedException | ExecutionException|TimeoutException e) {
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
             fullTranslation = new FullTranslation("", "");
             fullTranslation.setSuccessful(false);
             fullTranslation.setFromCache(false);
@@ -230,7 +233,7 @@ public class Parser {
         fullTranslation.setSuccessful(true);
         fullTranslation.setFromCache(false);
 
-        if (fullTranslation == null ||fullTranslation.getTranslatedWord().equals("")|| !fullTranslation.getTranslatedWord().matches(".*\\p{InCyrillic}.*")) {
+        if (fullTranslation == null || fullTranslation.getTranslatedWord().equals("") || !fullTranslation.getTranslatedWord().matches(".*\\p{InCyrillic}.*")) {
             fullTranslation = new FullTranslation("", "");
             fullTranslation.setFromCache(false);
             fullTranslation.setSuccessful(false);
@@ -243,6 +246,7 @@ public class Parser {
     private String simpleTranslationOfEverything(String toTranslate) {
         String url = "https://translate.google.sn/translate_a/t?client=dict-chrome-ex&sl=en&tl=ru&q=" + toTranslate.replaceAll(" ", "%20") + "&tbb=1&ie=UTF-8&oe=UTF-8";
         URLConnection connection = null;
+        ConnectByHttp.appendTrafficBytes(url.length());
         try {
             connection = new URL(url).openConnection();
             connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
@@ -257,18 +261,17 @@ public class Parser {
             }
             JSONObject json = new JSONObject(sb.toString());
             HashMap hashMap = (HashMap) json.getJSONArray("sentences").toList().iterator().next();
-            String result=(String) hashMap.get("trans");
-            if(result==null||result.equals("")){
-                hashMap=(HashMap)json.getJSONArray("dict").toList().iterator().next();
-                ArrayList arrayList= (ArrayList) hashMap.get("terms");
-                result=(String) arrayList.iterator().next();
+            String result = (String) hashMap.get("trans");
+            if (result == null || result.equals("")) {
+                hashMap = (HashMap) json.getJSONArray("dict").toList().iterator().next();
+                ArrayList arrayList = (ArrayList) hashMap.get("terms");
+                result = (String) arrayList.iterator().next();
             }
             return result;
-        }catch (ConnectException e) {
+        } catch (ConnectException e) {
             e.printStackTrace();
             return "";
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return "";
         }

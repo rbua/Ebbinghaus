@@ -15,10 +15,18 @@ import java.util.concurrent.*;
 
 public class ConnectByHttp {
     static private HttpServer server = null;
-
+static private volatile long trafficBytes=0;
     static private BlockingQueue<Map<String, List<String>>> blockingQueueWithQUERY_PAIRS = new ArrayBlockingQueue(10);
     static private BlockingQueue<FullTranslation> blockingQueueWithRESPONSE_FullTranslation = new ArrayBlockingQueue(10);
     static private final int VALIDATING_KEY = 348485251;
+
+    public static long getTrafficBytes() {
+        return trafficBytes;
+    }
+
+    public static void appendTrafficBytes(long trafficBytes) {
+        ConnectByHttp.trafficBytes += trafficBytes;
+    }
 
     public static BlockingQueue<Map<String, List<String>>> getBlockingQueueWithQueryPairs() {
         return blockingQueueWithQUERY_PAIRS;
@@ -47,6 +55,7 @@ public class ConnectByHttp {
 
     private static void handleRequest(HttpExchange exchange) throws IOException {
         JSONObject obj = null;
+        appendTrafficBytes(exchange.getRequestURI().toString().length());
         Map<String, List<String>> query_pairs = null;
         URI requestURI = exchange.getRequestURI();
         try {
@@ -84,8 +93,9 @@ public class ConnectByHttp {
         exchange.sendResponseHeaders(200, obj.toString().getBytes("UTF-16").length);
         DataOutputStream outputStream = new DataOutputStream(exchange.getResponseBody());
         outputStream.write(obj.toString().getBytes("UTF-16"));
+        trafficBytes+=obj.toString().getBytes("UTF-16").length;
         outputStream.close();
-        System.out.println(obj.toString());
+        System.out.println(obj.toString()+"\nTOTAL TRAFFIC: "+trafficBytes/1000F+" KB");
     }
 
     private static FullTranslation getFullTranslationForResponse(Map<String, List<String>> query_pairs) {
@@ -97,15 +107,6 @@ public class ConnectByHttp {
         FullTranslation fullTranslation = null;
         try {
             switch (type) {
-                case "getFullTranslation":
-                    if (database.isConnected())
-                        fullTranslation = database.getFullTranslation(toTranslate);
-                    if (fullTranslation == null) {
-                        fullTranslation = parser.getFullTranslation(toTranslate);
-                        if (fullTranslation.isSuccessful() && database.isConnected() && !fullTranslation.getWordToTranslate().matches(".* .*"))
-                            database.putAllFullTranslation(fullTranslation);
-                    }
-                    break;
                 case "wordById":
                     if (database.isConnected())
                         try {

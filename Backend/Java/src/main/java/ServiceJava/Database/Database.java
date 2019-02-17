@@ -30,10 +30,10 @@ public class Database {
     }
 
     private Database() {
-        String url = "jdbc:mysql://remotemysql.com:3306/FQSvAFRC1n?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+        String url = "jdbc:mysql://remotemysql.com:3306/49c8cAO5RX?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
         //NOT original String url = "jdbc:mysql://localhost:3306/dictionary?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
         try {
-            connectionToDatabase = DriverManager.getConnection(url, "FQSvAFRC1n", "rxtMdHq0UO");
+            connectionToDatabase = DriverManager.getConnection(url, "49c8cAO5RX", "5EIPNYuArp");
             //NOT original connectionToDatabase = DriverManager.getConnection(url, "root", "q1w2e3r4t5y6");
             if (!connectionToDatabase.isClosed()) connected = true;
         } catch (SQLException | CJCommunicationsException e) {
@@ -121,14 +121,14 @@ public class Database {
                 if (includeWordAudio) {
                     switch (whichWordAudio) {
                         case "GB":
-                            fullTranslation.setWordENAudioURLGB(getWordAudio(fullTranslation.getWordToTranslate(),false));
+                            fullTranslation.setWordENAudioURLGB(getWordAudio(fullTranslation.getWordToTranslate(), false));
                             break;
                         case "US":
-                            fullTranslation.setWordENAudioURLUS(getWordAudio(fullTranslation.getWordToTranslate(),true));
+                            fullTranslation.setWordENAudioURLUS(getWordAudio(fullTranslation.getWordToTranslate(), true));
                             break;
                         case "BOTH":
-                            fullTranslation.setWordENAudioURLUS(getWordAudio(fullTranslation.getWordToTranslate(),true));
-                            fullTranslation.setWordENAudioURLGB(getWordAudio(fullTranslation.getWordToTranslate(),false));
+                            fullTranslation.setWordENAudioURLUS(getWordAudio(fullTranslation.getWordToTranslate(), true));
+                            fullTranslation.setWordENAudioURLGB(getWordAudio(fullTranslation.getWordToTranslate(), false));
                             break;
                     }
                 }
@@ -146,18 +146,21 @@ public class Database {
         }
     }
 
-    public int getWordId(String toFind){
-        int result=0;
-        try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT translation_ID FROM EN_RU_word_translation WHERE word=?;")){
-        preparedStatementForEN_RU_word_translationSELECT.setString(1,toFind);
-        ResultSet resultSet=preparedStatementForEN_RU_word_translationSELECT.executeQuery();
-        if(resultSet.first())result= resultSet.getInt(1);
-        resultSet.close();
-        }catch (SQLException e){
+    public int getWordId(String toFind) {
+        int result = 0;
+        try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT translation_ID FROM EN_RU_word_translation WHERE word=?;")) {
+            preparedStatementForEN_RU_word_translationSELECT.setString(1, toFind);
+            ResultSet resultSet = preparedStatementForEN_RU_word_translationSELECT.executeQuery();
+            if (resultSet.first()) result = resultSet.getInt(1);
+            resultSet.close();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return result;
-    };
+    }
+
+    ;
+
     private String getWordAudio(String toTranslate, boolean US) {
         if (!connected) {
             return null;
@@ -329,7 +332,7 @@ public class Database {
         try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT * FROM EN_RU_word_translation WHERE word=?;");) {
             preparedStatementForEN_RU_word_translationSELECT.setString(1, toTranslate);
             ResultSet resultSet = preparedStatementForEN_RU_word_translationSELECT.executeQuery();
-            if(!resultSet.first())return null;
+            if (!resultSet.first()) return null;
             String[] result = new String[]{resultSet.getString(2), resultSet.getString(3)};
             resultSet.close();
             return result;
@@ -347,7 +350,7 @@ public class Database {
         try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT * FROM EN_RU_word_translation WHERE translated=?;");) {
             preparedStatementForEN_RU_word_translationSELECT.setString(1, translated);
             ResultSet resultSet = preparedStatementForEN_RU_word_translationSELECT.executeQuery();
-            if(!resultSet.first())return null;
+            if (!resultSet.first()) return null;
             String[] result = new String[]{resultSet.getString(2), resultSet.getString(3)};
             resultSet.close();
             return result;
@@ -365,7 +368,7 @@ public class Database {
         try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT * FROM EN_RU_word_translation WHERE translation_ID=?;");) {
             preparedStatementForEN_RU_word_translationSELECT.setInt(1, translationID);
             ResultSet resultSet = preparedStatementForEN_RU_word_translationSELECT.executeQuery();
-            if(!resultSet.first())return null;
+            if (!resultSet.first()) return null;
             String[] result = new String[]{resultSet.getString(2), resultSet.getString(3)};
             resultSet.close();
             return result;
@@ -550,8 +553,8 @@ public class Database {
 
     synchronized public boolean putAllFullTranslation(FullTranslation fullTranslation) {
         long start = System.currentTimeMillis();
-        if(!connected)return false;
-        if (fullTranslation == null||!fullTranslation.isSuccessful()) return false;
+        if (!connected) return false;
+        if (fullTranslation == null || !fullTranslation.isSuccessful()) return false;
         checkDatabaseSize();
         if (!freeSpace) return false;
         try (PreparedStatement preparedStatementForEN_RU_word_translationSELECT = connectionToDatabase.prepareStatement("SELECT translation_ID FROM EN_RU_word_translation WHERE word=?;");
@@ -675,6 +678,8 @@ public class Database {
                     } else {
                         preparedStatementForSentencesINSERT.setString(1, sentencesInEnglishRussian[0][counter]);
                         preparedStatementForSentencesINSERT.setString(2, sentencesInEnglishRussian[1][counter]);
+                        if (sentencesInEnglishRussian[0][counter].length() > 600 || sentencesInEnglishRussian[1][counter].length() > 600)
+                            continue;
                         preparedStatementForSentencesINSERT.executeUpdate();
                         ResultSet resultSet = preparedStatementForSentencesSELECTForCheck.executeQuery();
                         resultSet.first();
@@ -754,6 +759,8 @@ public class Database {
                 } else preparedStatementForTranslation_ID_ALL_keyINSERT.setNull(4, Types.INTEGER);
                 preparedStatementForTranslation_ID_ALL_keyINSERT.executeUpdate();
             }
+        } catch (DataTruncation e) {
+            e.printStackTrace();
         } catch (SQLException e) {
             connected = false;
             e.printStackTrace();
@@ -761,7 +768,7 @@ public class Database {
             e.printStackTrace();
         }
         long end = System.currentTimeMillis();
-        System.out.println("INSERTED for: "+(end-start)+" MS");
+        System.out.println("INSERTED for: " + (end - start) + " MS");
         return true;
     }
 
